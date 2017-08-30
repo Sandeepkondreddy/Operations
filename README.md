@@ -1,2 +1,2 @@
-# InternalOperations
-RFID Internal Operations Mobile App for KPCL.
+# Operations
+Operations Mobile App for KPCL and KPCT.

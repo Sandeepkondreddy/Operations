@@ -38,8 +38,8 @@ var url = "";
                 $("#txtpassword").attr('disabled', true); 
                 $.ajax({
                     type: "GET",
-					url: "http://202.83.27.199/TestAPI/api/User/ValidateUser/" + $("#txtusername").val().trim() + "/" + $("#txtpassword").val(),	  	//Act Link.                
-					//url: "http://182.72.244.25/KPCTSDS/api/Account/ValidateUser/" + $("#txtusername").val().trim() + "/" + $("#txtpassword").val(),   //Airtel Link.
+					/* url: "http://202.83.27.199/TestAPI/api/User/ValidateUser/" + $("#txtusername").val().trim() + "/" + $("#txtpassword").val(),	  	//Act Link.       */          
+					url: "http://182.72.244.25/KPCTSDS/api/Account/ValidateUser/" + $("#txtusername").val().trim() + "/" + $("#txtpassword").val(),   //Airtel Link.
                     data: '{}',
                     contentType: "application/json",
                     success: function(data) {
@@ -47,8 +47,8 @@ var url = "";
                             $("#hidusrid").val(data[0]);
                             $.ajax({
                                 type: "GET",
-                                url: "http://202.83.27.199/TestAPI/api/User/GetUserScreens/" + $("#hidusrid").val(),		//Act Link.						
-								//url: "http://182.72.244.25/KPCTSDS/api/Account/GetUserScreens/" + $("#hidusrid").val(),	//Airtel Link.
+                                //url: "http://202.83.27.199/TestAPI/api/User/GetUserScreens/" + $("#hidusrid").val(),		//Act Link.						
+								url: "http://182.72.244.25/KPCTSDS/api/Account/GetUserScreens/" + $("#hidusrid").val(),	//Airtel Link.
                                 data: '{}',
                                 contentType: "application/json",
                                 success: function(result) {

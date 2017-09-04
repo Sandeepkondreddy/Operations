@@ -35,7 +35,7 @@ var url = "";
                 $btn.attr('disabled', true);
                 $btn.attr('class', 'btn btn-custom-icon');
                 $("#txtusername").attr('disabled', true);
-                $("#txtpassword").attr('disabled', true);
+                $("#txtpassword").attr('disabled', true); 
                 $.ajax({
                     type: "GET",
 					url: "http://202.83.27.199/TestAPI/api/User/ValidateUser/" + $("#txtusername").val().trim() + "/" + $("#txtpassword").val(),	  	//Act Link.                

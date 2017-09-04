@@ -56,7 +56,7 @@ var url = "";
                                 contentType: "application/json",
                                 success: function(result) {
 									Home=result;insertUserRecord();showUserRecords();
-                                    window.location.href = result + '?user=' + btoa($("#hidusrid").val());
+                                    //window.location.href = result + '?user=' + btoa($("#hidusrid").val());
                                 }
                             });
                         } else {

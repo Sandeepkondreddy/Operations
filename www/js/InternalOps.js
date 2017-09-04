@@ -313,7 +313,7 @@ function TableCeationMessage()
 	document.getElementById('lblmessage').innerHTML = 'Offline Table Created Successfully.!';
 }
 function insertRecord() // Get value from Input and insert record . Function Call when Save/Submit Button Click..
-{debugger;
+{
 		var TaskCodeTemp = document.getElementById("txtTaskCode").value;
         var SubTaskCodeTemp = $("#txtSubTaskCode").val();
         var OperationTemp = Operation;

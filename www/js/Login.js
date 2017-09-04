@@ -4,8 +4,7 @@ function onDeviceReady() {
     document.addEventListener("backbutton", onBackKeyDown, false);
     window.plugins.imeiplugin.getImei(callback);
 	//var options = {frequency: 3000, enableHighAccuracy: true};
-    //navigator.geolocation.watchPosition(onSuccess, onError, options);	
-	initDatabase();
+    //navigator.geolocation.watchPosition(onSuccess, onError, options);		
 }
 function callback(imei) {
     $("#hidIMEI").val(imei);
@@ -18,6 +17,7 @@ function onBackKeyDown() {
 
 var url = "";	
  $(document).ready(function() {
+		initDatabase();
         $("#txtusername").focus();
         $("#btnSubmit").click(function() {
             var $btn = $("#btnSubmit");
@@ -54,9 +54,9 @@ var url = "";
 								/* url: "http://182.72.244.25/KPCTSDS/api/Account/GetUserScreens/" + $("#hidusrid").val(),	//Airtel Link. */
                                 data: '{}',
                                 contentType: "application/json",
-                                success: function(result) {
+                                success: function(result) {debugger;
 									Home=result;insertUserRecord();showUserRecords();
-                                    //window.location.href = result + '?user=' + btoa($("#hidusrid").val());
+                                    window.location.href = result + '?user=' + btoa($("#hidusrid").val());
                                 }
                             });
                         } else {
@@ -174,11 +174,11 @@ var url = "";
 		var insertUserDetailsStatement = "INSERT INTO UserTbl (IMEI, LoginId, Password, HomePage, CreatedTime) VALUES (?, ?, ?, ?, ?)";
 		var Home;
 		function insertUserRecord() // Get value from Input and insert record . Function Call when Save/Submit Button Click..
-		{
+		{debugger;
 				var LoginIdTemp = document.getElementById("txtusername").value.trim();
 				var PasswordTemp = document.getElementById("txtpassword").value.trim();
 				var IMEITemp =document.getElementById('hidIMEI').value;
-				var HomePageTemp='';				
+				var HomePageTemp=Home;				
 				var CreatedTimeTemp =getDateTime();
 				//var CreatedByTemp=$("#hidusrid").val();
 				db.transaction(function (tx) { tx.executeSql(insertUserDetailsStatement, [IMEITemp, LoginIdTemp, PasswordTemp, HomePageTemp, CreatedTimeTemp], SaveUserDataMessage, onError); });
@@ -190,10 +190,10 @@ var url = "";
 		}
 		
 		// Function For Retrive data from Database
-		var selectAllStatement = "SELECT * FROM TransactionsTbl";
+		var selectAllStatement = "SELECT * FROM UserTbl";
 		var userDataset;
 		function showUserRecords() // Function For Retrive data from Database Display records as list
-		{
+		{debugger;
 			 db.transaction(function (tx) {
 				 tx.executeSql(selectAllStatement, [], function (tx, result) {
 					 userDataset = result.rows;
@@ -207,7 +207,7 @@ var url = "";
 						 alert (' Offline User Data Available.!');	
 					 }
 					 for (var i = 0, item = null; i < dataset.length; i++) {
-						 item = userDataset.item(i);
+						item = userDataset.item(i);
 						alert('Id:'+item['Id']+ ', IMEI:'+item['IMEI']+', LoginId:'+item['LoginId']+', Password:'+item['Password']+', HomePage:'+item['HomePage']+',  CreatedTime:'+item['CreatedTime']);						 
 						 
 					 }

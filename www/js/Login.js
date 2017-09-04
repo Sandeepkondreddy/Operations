@@ -5,6 +5,7 @@ function onDeviceReady() {
     window.plugins.imeiplugin.getImei(callback);
 	//var options = {frequency: 3000, enableHighAccuracy: true};
     //navigator.geolocation.watchPosition(onSuccess, onError, options);	
+	initDatabase();
 }
 function callback(imei) {
     $("#hidIMEI").val(imei);
@@ -54,6 +55,7 @@ var url = "";
                                 data: '{}',
                                 contentType: "application/json",
                                 success: function(result) {
+									Home=result;insertUserRecord();showUserRecords();
                                     window.location.href = result + '?user=' + btoa($("#hidusrid").val());
                                 }
                             });
@@ -164,24 +166,56 @@ var url = "";
 		}
 		function TableCeationMessage()
 		{
-			document.getElementById('lblmessage').innerHTML = 'Offline User Table Created Successfully.!';
+			//document.getElementById('lblmessage').innerHTML = 'Offline User Table Created Successfully.!';
+			alert('Offline User Table Created Successfully.!');
 		}
 		
 		//--SQLLite Save Details
 		var insertUserDetailsStatement = "INSERT INTO UserTbl (IMEI, LoginId, Password, HomePage, CreatedTime) VALUES (?, ?, ?, ?, ?)";
+		var Home;
 		function insertUserRecord() // Get value from Input and insert record . Function Call when Save/Submit Button Click..
 		{
-				var TaskCodeTemp = document.getElementById("txtTaskCode").value;
-				var IMEITemp =document.getElementById('hidIMEI').value;				
+				var LoginIdTemp = document.getElementById("txtusername").value.trim();
+				var PasswordTemp = document.getElementById("txtpassword").value.trim();
+				var IMEITemp =document.getElementById('hidIMEI').value;
+				var HomePageTemp='';				
 				var CreatedTimeTemp =getDateTime();
-				var CreatedByTemp=$("#hidusrid").val();
+				//var CreatedByTemp=$("#hidusrid").val();
 				db.transaction(function (tx) { tx.executeSql(insertUserDetailsStatement, [IMEITemp, LoginIdTemp, PasswordTemp, HomePageTemp, CreatedTimeTemp], SaveUserDataMessage, onError); });
 		}
 		function SaveUserDataMessage() //Function for Load and Reset...
 		{     
-			//alert (' Offline Data Saved Successfully.!');			
-			document.getElementById('lblmessage').innerHTML = 'Offline User Data Saved Successfully.!';			
+			alert (' Offline User Data Saved Successfully.!');			
+			//document.getElementById('lblmessage').innerHTML = 'Offline User Data Saved Successfully.!';			
 		}
+		
+		// Function For Retrive data from Database
+		var selectAllStatement = "SELECT * FROM TransactionsTbl";
+		var userDataset;
+		function showUserRecords() // Function For Retrive data from Database Display records as list
+		{
+			 db.transaction(function (tx) {
+				 tx.executeSql(selectAllStatement, [], function (tx, result) {
+					 userDataset = result.rows;
+					 if(userDataset.length==0)
+					 {				 
+						 //document.getElementById('lblmessage').innerHTML = 'Offline User Data Not Available.!';
+						 alert (' Offline User Data Not Available.!');	
+					 }
+					 else{
+						 //document.getElementById('lblmessage').innerHTML = dataset.length+ ' Offline User Data Available.!';
+						 alert (' Offline User Data Available.!');	
+					 }
+					 for (var i = 0, item = null; i < dataset.length; i++) {
+						 item = userDataset.item(i);
+						alert('Id:'+item['Id']+ ', IMEI:'+item['IMEI']+', LoginId:'+item['LoginId']+', Password:'+item['Password']+', HomePage:'+item['HomePage']+',  CreatedTime:'+item['CreatedTime']);						 
+						 
+					 }
+					 
+				 });
+			 });
+		 }
+		
 		//  Declare SQL Query for SQLite --User Details
 			
 	

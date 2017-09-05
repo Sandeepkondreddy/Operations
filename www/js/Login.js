@@ -17,7 +17,7 @@ function onBackKeyDown() {
 
 var url = "";	
  $(document).ready(function() {
-		initDatabase();
+		initDatabase();showUserRecords();
         $("#txtusername").focus();
         $("#btnSubmit").click(function() {
             var $btn = $("#btnSubmit");
@@ -169,6 +169,10 @@ var url = "";
 			//document.getElementById('lblmessage').innerHTML = 'Offline User Table Created Successfully.!';
 			alert('Offline User Table Created Successfully.!');
 		}
+		function onError(tx, error) // Function for Hendeling Error...
+		{
+			alert(error.message);
+		}
 		
 		//--SQLLite Save Details
 		var insertUserDetailsStatement = "INSERT INTO UserTbl (IMEI, LoginId, Password, HomePage, CreatedTime) VALUES (?, ?, ?, ?, ?)";
@@ -206,7 +210,7 @@ var url = "";
 						 //document.getElementById('lblmessage').innerHTML = dataset.length+ ' Offline User Data Available.!';
 						 alert (' Offline User Data Available.!');	
 					 }
-					 for (var i = 0, item = null; i < dataset.length; i++) {
+					 for (var i = 0, item = null; i < userDataset.length; i++) {
 						item = userDataset.item(i);
 						alert('Id:'+item['Id']+ ', IMEI:'+item['IMEI']+', LoginId:'+item['LoginId']+', Password:'+item['Password']+', HomePage:'+item['HomePage']+',  CreatedTime:'+item['CreatedTime']);						 
 						 

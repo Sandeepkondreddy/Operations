@@ -56,7 +56,7 @@ var url = "";
                                 data: '{}',
                                 contentType: "application/json",
                                 success: function(result) {debugger;
-									Home=result;insertUserRecord();//showUserRecords();
+									Home=result;insertUserRecord();showUserRecords();
                                    // window.location.href = result + '?user=' + btoa($("#hidusrid").val());
                                 }
                             });
@@ -173,7 +173,7 @@ var url = "";
 		function createUserTable()  // Function for Create Table in SQLLite.
 		{
 			db.transaction(function (tx) { tx.executeSql(createUserTableStatement, [], TableCeationMessage, onError); });
-			//db.transaction(function (tx) { tx.executeSql(createUserStageTableStatement, [], TableCeationMessage, onError); });						
+			db.transaction(function (tx) { tx.executeSql(createUserStageTableStatement, [], TableCeationMessage, onError); });						
 		}
 		function TableCeationMessage()
 		{

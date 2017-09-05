@@ -86,7 +86,7 @@ var url = "";
             }
         });
 		
-		$("#btnSubmit").click(function()
+		$("#btnExit").click(function()
 		{
 			var state = confirm('Are You Sure you want to Exit.');
 			if (state)

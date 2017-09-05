@@ -21,6 +21,7 @@ var url = "";
         $("#txtusername").focus();
         $("#btnSubmit").click(function() {
             var $btn = $("#btnSubmit");
+			var exitbtn = document.getElementById("btnExit"); exitbtn.disabled = true;
 			
             if ($("#txtusername").val() == "") {
                 alert('Enter User Name.');
@@ -85,6 +86,7 @@ var url = "";
                 });
 				
             }
+			exitbtn.disabled= false;
         });
 		
 		$("#btnExit").click(function()

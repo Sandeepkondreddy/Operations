@@ -169,7 +169,7 @@ var url = "";
 		 
 		//--SQLLite  Table Creation
 		var createUserTableStatement = "CREATE TABLE IF NOT EXISTS UserTbl (Id INTEGER PRIMARY KEY AUTOINCREMENT, IMEI TEXT, LoginId TEXT, Password TEXT,HomePage TEXT,CreatedTime TEXT)";
-		var createUserStageMasterTableStatement = "CREATE TABLE IF NOT EXISTS UserStagesTbl (Id INTEGER PRIMARY KEY AUTOINCREMENT, StageId TEXT, StageName TEXT, OperationState TEXT)";
+		var createUserStageMasterTableStatement = "CREATE TABLE IF NOT EXISTS UserStagesTbl (Id INTEGER PRIMARY KEY AUTOINCREMENT, StageId TEXT, StageName TEXT, UserPermission TEXT)";
 		function createUserTable()  // Function for Create Table in SQLLite.
 		{
 			db.transaction(function (tx) { tx.executeSql(createUserTableStatement, [], TableCeationMessage, onError); });

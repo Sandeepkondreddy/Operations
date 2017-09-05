@@ -79,12 +79,12 @@ function qs() {
 		 }
 		 
 		 // Function For Retrive User data from Database
-		var selectAllStatement = "SELECT * FROM UserTbl";
+		var selectRecentUserStatement = " SELECT * FROM UserTbl where Id=(Select Max(Id) from UserTbl)";
 		var userDataset;
 		function showUserRecords() // Function For Retrive data from Database Display records as list
 		{debugger;
 			 db.transaction(function (tx) {
-				 tx.executeSql(selectAllStatement, [], function (tx, result) {
+				 tx.executeSql(selectRecentUserStatement, [], function (tx, result) {
 					 userDataset = result.rows;
 					 if(userDataset.length==0)
 					 {				 

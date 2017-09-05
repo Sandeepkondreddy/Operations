@@ -31,10 +31,10 @@ var url = "";
                 $("#txtpassword").focus();
                 return false;
             } else {
-                $btn.find("i.fa").attr('class', 'fa fa-spinner fa-spin fa-lg');
-                $btn.find("span").text("Logging in please wait...");
+                $btn.find("i.fa").attr('class', 'fa fa-spinner fa-spin fa-lg');				
+                $btn.find("span").text("Logging in ...");
                 $btn.attr('disabled', true);
-                $btn.attr('class', 'btn btn-custom-icon');
+               // $btn.attr('class', 'btn btn-custom-icon');
                 $("#txtusername").attr('disabled', true);
                 $("#txtpassword").attr('disabled', true); 
                 $.ajax({
@@ -55,7 +55,7 @@ var url = "";
                                 data: '{}',
                                 contentType: "application/json",
                                 success: function(result) {debugger;
-									Home=result;insertUserRecord();showUserRecords();
+									Home=result;insertUserRecord();//showUserRecords();
                                    // window.location.href = result + '?user=' + btoa($("#hidusrid").val());
                                 }
                             });
@@ -63,7 +63,7 @@ var url = "";
                             $btn.find("i.fa").attr('class', 'fa fa-sign-in fa-lg');
                             $btn.find("span").text("Login");
                             $btn.attr('disabled', false);
-                            $btn.attr('class', 'btn btn-custom');
+                            $btn.attr('class', 'btn btn-primary');
                             $("#txtusername").attr('disabled', false);
                             $("#txtpassword").attr('disabled', false);
                             $("#txtpassword").val("");
@@ -83,6 +83,7 @@ var url = "";
                         alert("Invalid User Name or Password");
                     }
                 });
+				
             }
         });
 		
@@ -201,7 +202,7 @@ var url = "";
 		}
 		
 		// Function For Retrive data from Database
-		var selectAllStatement = "SELECT * FROM UserTbl";
+		var selectAllStatement = "SELECT * FROM UserTbl where Id=(Select Max(Id) from UserTbl)";
 		var userDataset;
 		function showUserRecords() // Function For Retrive data from Database Display records as list
 		{debugger;

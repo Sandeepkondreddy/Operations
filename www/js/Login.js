@@ -17,7 +17,7 @@ function onBackKeyDown() {
 
 var url = "";	
  $(document).ready(function() {
-		initDatabase();showUserRecords();
+		initDatabase();//showUserRecords();
         $("#txtusername").focus();
         $("#btnSubmit").click(function() {
             var $btn = $("#btnSubmit");
@@ -56,7 +56,7 @@ var url = "";
                                 contentType: "application/json",
                                 success: function(result) {debugger;
 									Home=result;insertUserRecord();showUserRecords();
-                                    window.location.href = result + '?user=' + btoa($("#hidusrid").val());
+                                   // window.location.href = result + '?user=' + btoa($("#hidusrid").val());
                                 }
                             });
                         } else {
@@ -85,6 +85,13 @@ var url = "";
                 });
             }
         });
+		
+		$("#btnSubmit").click(function()
+		{
+			var state = confirm('Are You Sure you want to Exit.');
+			if (state)
+            navigator.app.exitApp();
+		});
     });
 	
 	
@@ -167,7 +174,7 @@ var url = "";
 		function TableCeationMessage()
 		{
 			//document.getElementById('lblmessage').innerHTML = 'Offline User Table Created Successfully.!';
-			alert('Offline User Table Created Successfully.!');
+			//alert('Offline User Table Created Successfully.!');
 		}
 		function onError(tx, error) // Function for Hendeling Error...
 		{
@@ -204,20 +211,21 @@ var url = "";
 					 if(userDataset.length==0)
 					 {				 
 						 //document.getElementById('lblmessage').innerHTML = 'Offline User Data Not Available.!';
-						 alert (' Offline User Data Not Available.!');	
+						 //alert (' Offline User Data Not Available.!');	
 					 }
 					 else{
 						 //document.getElementById('lblmessage').innerHTML = dataset.length+ ' Offline User Data Available.!';
-						 alert (' Offline User Data Available.!');	
+						// alert (' Offline User Data Available.!');	
 					 }
 					 for (var i = 0, item = null; i < userDataset.length; i++) {
 						item = userDataset.item(i);
-						alert('Id:'+item['Id']+ ', IMEI:'+item['IMEI']+', LoginId:'+item['LoginId']+', Password:'+item['Password']+', HomePage:'+item['HomePage']+',  CreatedTime:'+item['CreatedTime']);						 
-						 
+						//alert('Id:'+item['Id']+ ', IMEI:'+item['IMEI']+', LoginId:'+item['LoginId']+', Password:'+item['Password']+', HomePage:'+item['HomePage']+',  CreatedTime:'+item['CreatedTime']);						 
+						 window.location.href = item['HomePage'] + '?user=' + btoa($("#hidusrid").val());
 					 }
 					 
 				 });
 			 });
+			  
 		 }
 		
 		//  Declare SQL Query for SQLite --User Details

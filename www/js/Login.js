@@ -155,8 +155,7 @@ var url = "";
 				 else {
 					 createUserTable();  // If supported then call Function for create table in SQLite
 				 }
-			 }
-		 
+			 }		 
 			catch (e) {
 				 if (e == 2) {
 					 // Version number mismatch. 
@@ -170,9 +169,11 @@ var url = "";
 		 
 		//--SQLLite  Table Creation
 		var createUserTableStatement = "CREATE TABLE IF NOT EXISTS UserTbl (Id INTEGER PRIMARY KEY AUTOINCREMENT, IMEI TEXT, LoginId TEXT, Password TEXT,HomePage TEXT,CreatedTime TEXT)";
+		var createUserStageMasterTableStatement = "CREATE TABLE IF NOT EXISTS UserStagesTbl (Id INTEGER PRIMARY KEY AUTOINCREMENT, StageId TEXT, StageName TEXT, OperationState TEXT)";
 		function createUserTable()  // Function for Create Table in SQLLite.
 		{
-			db.transaction(function (tx) { tx.executeSql(createUserTableStatement, [], TableCeationMessage, onError); });			
+			db.transaction(function (tx) { tx.executeSql(createUserTableStatement, [], TableCeationMessage, onError); });
+			db.transaction(function (tx) { tx.executeSql(createUserStageMasterTableStatement, [], TableCeationMessage, onError); });						
 		}
 		function TableCeationMessage()
 		{
@@ -199,7 +200,7 @@ var url = "";
 		}
 		function SaveUserDataMessage() //Function for Load and Reset...
 		{     
-			alert (' Offline User Data Saved Successfully.!');			
+			//alert (' Offline User Data Saved Successfully.!');			
 			//document.getElementById('lblmessage').innerHTML = 'Offline User Data Saved Successfully.!';			
 		}
 		

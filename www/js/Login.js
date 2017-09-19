@@ -46,6 +46,7 @@ var url = "";
                     data: '{}',
                     contentType: "application/json",
                     success: function(data) {
+						
                         if (data[1] == 'True') {
                             $("#hidusrid").val(data[0]);
                             $.ajax({
@@ -55,7 +56,7 @@ var url = "";
 								/* url: "http://182.72.244.25/KPCTSDS/api/Account/GetUserScreens/" + $("#hidusrid").val(),	//Airtel Link. */
                                 data: '{}',
                                 contentType: "application/json",
-                                success: function(result) {debugger;
+                                success: function(result) {
 									Home=result;insertUserRecord();showUserRecords();
                                    // window.location.href = result + '?user=' + btoa($("#hidusrid").val());
                                 }
@@ -178,7 +179,7 @@ var url = "";
 		function TableCeationMessage()
 		{
 			//document.getElementById('lblmessage').innerHTML = 'Offline User Table Created Successfully.!';
-			alert('Offline User Table Created Successfully.!');
+			alert('Offline Table Created Successfully.!');
 		}
 		function onError(tx, error) // Function for Hendeling Error...
 		{

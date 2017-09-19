@@ -39,7 +39,7 @@ $(document).ready(function () {
     $("#home").click(function () {
         $.ajax({
             type: "GET",
-			url: "http://202.83.27.199/TestAPI/api/User/GetUserScreens/" + $("#hidusrid").val(),
+			url: "http://apps.kpcl.com/KPCLOpsAPI/api/User/GetUserScreens/" + $("#hidusrid").val(),
             //url: "http://202.83.27.199/KPCTSDS/api/Account/GetUserScreens/" + $("#hidusrid").val(),
 	        //url: "http://182.72.244.25/KPCTSDS/api/Account/GetUserScreens/" + $("#hidusrid").val(),
             data: '{}',
@@ -70,7 +70,7 @@ $(document).ready(function () {
             Adddata.User = 'admin';
             $.ajax({
                 type: 'POST',
-                url: 'http://202.83.27.199/TestAPI/api/Device/RegisterDevice',
+                url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Device/RegisterDevice',
                 dataType: "json",
                 data: Adddata,
                 success: function (loctyperesult) {

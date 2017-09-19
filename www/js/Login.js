@@ -40,7 +40,7 @@ var url = "";
                 $("#txtpassword").attr('disabled', true); 
                 $.ajax({
                     type: "GET",
-					url: "http://apps.kpcl.com/KPCTSDS/api/Account/ValidateUser/" + $("#txtusername").val().trim() + "/" + $("#txtpassword").val(),   
+					url: "http://apps.kpcl.com/KPCLOpsAPI/api/User/ValidateUser/" + $("#txtusername").val().trim() + "/" + $("#txtpassword").val(),   
 					/* url: "http://202.83.27.199/TestAPI/api/User/ValidateUser/" + $("#txtusername").val().trim() + "/" + $("#txtpassword").val(),	  	//Act Link.       */          
 					/* url: "http://182.72.244.25/KPCTSDS/api/Account/ValidateUser/" + $("#txtusername").val().trim() + "/" + $("#txtpassword").val(),   //Airtel Link. */
                     data: '{}',
@@ -50,7 +50,7 @@ var url = "";
                             $("#hidusrid").val(data[0]);
                             $.ajax({
                                 type: "GET",
-								url: "http://apps.kpcl.com/KPCTSDS/api/Account/GetUserScreens/" + $("#hidusrid").val(),
+								url: "http://apps.kpcl.com/KPCLOpsAPI/api/User/GetUserScreens/" + $("#hidusrid").val(),
                                 //url: "http://202.83.27.199/TestAPI/api/User/GetUserScreens/" + $("#hidusrid").val(),		//Act Link.						
 								/* url: "http://182.72.244.25/KPCTSDS/api/Account/GetUserScreens/" + $("#hidusrid").val(),	//Airtel Link. */
                                 data: '{}',
@@ -229,7 +229,6 @@ var url = "";
 					 
 				 });
 			 });
-			  
 		 }
 		
 		//  Declare SQL Query for SQLite --User Details

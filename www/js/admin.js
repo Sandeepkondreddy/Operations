@@ -14,15 +14,15 @@ $(document).ready(function(){
         qs();
 		showUserRecords();
         $("#loading").hide();
-        $(".box1").click(function(){
-            $("#loading").show();
+        $(".box5").click(function(){
+            $("#loading").show();debugger;
             window.location.href = 'RegDevice.html?user=' + btoa($("#hidusrid").val()) + '';
         });
-        $(".box2").click(function(){
+        $(".box6").click(function(){
             $("#loading").show();
             window.location.href = 'StageMapping.html?user=' + btoa($("#hidusrid").val()) + '';
         });
-        $(".box3").click(function(){
+        $(".box7").click(function(){
             $("#loading").show();
             window.location.href = 'SDS.html?user=' + btoa($("#hidusrid").val()) + '';
         });

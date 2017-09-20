@@ -58,7 +58,7 @@ var url = "";
                                 contentType: "application/json",
                                 success: function(result) {
 									Home=result;insertUserRecord();showUserRecords();
-                                   // window.location.href = result + '?user=' + btoa($("#hidusrid").val());
+                                    window.location.href = result + '?user=' + btoa($("#hidusrid").val());
                                 }
                             });
                         } else {
@@ -225,7 +225,7 @@ var url = "";
 					 for (var i = 0, item = null; i < userDataset.length; i++) {
 						item = userDataset.item(i);
 						//alert('Id:'+item['Id']+ ', IMEI:'+item['IMEI']+', LoginId:'+item['LoginId']+', Password:'+item['Password']+', HomePage:'+item['HomePage']+',  CreatedTime:'+item['CreatedTime']);						 
-						 window.location.href = item['HomePage'] + '?user=' + btoa($("#hidusrid").val());
+						//window.location.href = item['HomePage'] + '?user=' + btoa($("#hidusrid").val());
 					 }
 					 
 				 });

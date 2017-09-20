@@ -11,14 +11,14 @@ function onBackKeyDown() {
 $(document).ready(function (){
     $("#loading").hide();
     qs();
-    GetUsers();
+    GetUsers();GetOperations();
     GetStages();
     CheckBoxEvents();
 
     $("#home").click(function () {
         $.ajax({
             type: "GET",
-            url: "http://202.83.27.199/KPCTSDS/api/Account/GetUserScreens/" + $("#hidusrid").val(),
+            url: "http://apps.kpcl.com/KPCLOpsAPI/api/User/GetUserScreens/" + $("#hidusrid").val(),
 	    //url: "http://182.72.244.25/KPCTSDS/api/Account/GetUserScreens/" + $("#hidusrid").val(),
             data: '{}',
             contentType: "application/json",
@@ -29,6 +29,7 @@ $(document).ready(function (){
     });
 
     $('#seluser').dropdown();
+	$('#selOperation').dropdown();
 
     $('#seluser').change(function(){
         GetUserStages($(this).val().trim());
@@ -96,7 +97,7 @@ $(document).ready(function (){
                     alert('Stages Mapped Successfully.');
                     $.ajax({
                         type: "GET",
-                        url: "http://202.83.27.199/KPCTSDS/api/Account/GetUserScreens/" + $("#hidusrid").val(),
+                        url: "http://apps.kpcl.com/KPCLOpsAPI/api/User/GetUserScreens/" + $("#hidusrid").val(),
 			//url: "http://182.72.244.25/KPCTSDS/api/Account/GetUserScreens/" + $("#hidusrid").val(),
                         data: '{}',
                         contentType: "application/json",
@@ -172,7 +173,7 @@ function GetUsers()
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: 'http://202.83.27.199/KPCTSDS/api/Account/GetUsers',
+       url: 'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetUsers',
 	//url: 'http://182.72.244.25/KPCTSDS/api/Account/GetUsers',
         dataType: "json",
         data: '{}',
@@ -180,6 +181,29 @@ function GetUsers()
         success: function (result) {
             $.each(result, function (key, value) {
                 $("#seluser").append($("<option></option>").val(value.UserId).html(value.LoginId + '---' + value.EmployeeId));
+            });
+        },
+        error: function () {
+            alert("Error occurred while loading Users.");
+        }
+    });
+}
+
+function GetOperations()
+{
+    $("#selOperation").empty();
+    $("#selOperation").append("<option value=''>Select Operation</option>");
+    $.ajax({
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+    //    url: 'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetUsers',
+	url: 'http://182.72.244.25/KPCTSDS/api/Account/GetUsers',
+        dataType: "json",
+        data: '{}',
+        async: false,
+        success: function (result) {
+            $.each(result, function (key, value) {
+                $("#selOperation").append($("<option></option>").val(value.UserId).html(value.LoginId + '---' + value.EmployeeId));
             });
         },
         error: function () {

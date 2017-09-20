@@ -89,15 +89,15 @@ function qs() {
 					 if(userDataset.length==0)
 					 {				 
 						 //document.getElementById('lblmessage').innerHTML = 'Offline User Data Not Available.!';
-						 alert (' Offline User Data Not Available.!');	
+						 //alert (' Offline User Data Not Available.!');	
 					 }
 					 else{
 						 //document.getElementById('lblmessage').innerHTML = dataset.length+ ' Offline User Data Available.!';
-						 alert (' Offline User Data Available.!');	
+						// alert (' Offline User Data Available.!');	
 					 }
 					 for (var i = 0, item = null; i < userDataset.length; i++) {
 						item = userDataset.item(i);
-						alert('Id:'+item['Id']+ ', IMEI:'+item['IMEI']+', LoginId:'+item['LoginId']+', Password:'+item['Password']+', HomePage:'+item['HomePage']+',  CreatedTime:'+item['CreatedTime']);						 
+						//alert('Id:'+item['Id']+ ', IMEI:'+item['IMEI']+', LoginId:'+item['LoginId']+', Password:'+item['Password']+', HomePage:'+item['HomePage']+',  CreatedTime:'+item['CreatedTime']);						 
 						 
 					 }
 					 

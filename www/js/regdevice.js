@@ -11,7 +11,7 @@ function callback(imei) {
 }
 function onBackKeyDown() {
 }
-function qs() {
+function qs() {ValidateDevice();
     var query = window.location.search.substring(1);
     var parms = query.split('&');
     for (var i = 0; i < parms.length; i++) {
@@ -67,7 +67,7 @@ $(document).ready(function () {
             Adddata.IMEI = $("#txtimei").val();
             Adddata.UUID = $("#txtuuid").val();
             //Adddata.LocationType = _loctype;
-            Adddata.User = 'admin';
+            Adddata.User = $("#hidusrid").val();
             $.ajax({
                 type: 'POST',
                 url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Device/RegisterDevice',
@@ -90,46 +90,23 @@ $(document).ready(function () {
     });
 });
 
-function GetDeviceStatus(){
+function ValidateDevice(){
     var Adddata = {};
     Adddata.IMEI = $("#txtimei").val();
     Adddata.UUID = $("#txtuuid").val();
     $.ajax({
         type: "POST",
-        url: "http://202.83.27.199/TestAPI/api/Account/GetDeviceStatus",
+        url: "http://apps.kpcl.com/KPCLOpsAPI/api/Device/ValidateDevice",
 	//url: "http://182.72.244.25/KPCTSDS/api/Account/GetDeviceStatus",
         dataType: "json",
         data: Adddata,
-        success: function (result) {
-            $("#selLocType").empty();
-			
-            if (result != null) {
-                $("#selLocType").append($("<option></option>").val(result).html(result));
-                $("#btnSubmit").prop('disabled', true);
-                $("#btnSubmit").html("Device already Registered.");
+        success: function (result) {          
+			if (result != "--") {
+                alert('Device Already Registered.');
             }
             else {
-                $("#btnSubmit").prop('disabled', false);
-                $.ajax({
-                    type: "GET",
-                    contentType: "application/json; charset=utf-8",
-                    url: 'http://202.83.27.199/KPCTSDS/api/Location/GetLocationType/',
-					//url: 'http://182.72.244.25/KPCTSDS/api/Location/GetLocationType/',
-                    dataType: "json",
-                    data: '{}',
-                    async: false,
-                    success: function (loctyperesult) {
-                        $("#selLocType").append($("<option></option>").val('0').html('Select'));
-                        $("#selLocType").append($("<option></option>").val('PARKING').html('PARKING'));
-                        $.each(loctyperesult, function (key, value) {
-                            $("#selLocType").append($("<option></option>").val(value.LocationType).html(value.LocationType));
-                        });
-                    },
-                    error: function () {
-                        alert('Error Occurred while getting Device Status');
-                    }
-                });
-            }
+				alert('Device Not Registered, Please contact IT Team.');
+            } 
         },
         error: function () {
             alert('Error Occurred while getting Device Status');

@@ -13,7 +13,7 @@ $(document).ready(function (){
     qs();
     GetUsers();GetOperations();
     GetStages();
-    CheckBoxEvents();document.getElementById("seluser").disabled=true;
+    CheckBoxEvents();
 
     $("#home").click(function () {
         $.ajax({
@@ -179,7 +179,8 @@ function GetUsers()
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-       url: 'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetUsers',
+       //url: 'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetUsers',
+	   url:'http://localhost:51594/api/User/GetUsers',
 	//url: 'http://182.72.244.25/KPCTSDS/api/Account/GetUsers',
         dataType: "json",
         data: '{}',
@@ -197,19 +198,21 @@ function GetUsers()
 
 function GetOperations()
 {
+	//document.getElementById("seluser").disabled=true;
     $("#selOperation").empty();
     $("#selOperation").append("<option value=''>Select Operation</option>");
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-       url: 'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetUsers',
+		url:'http://localhost:51594/api/User/GetOperations',
+       //url: 'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetOperations',
 	//url: 'http://182.72.244.25/KPCTSDS/api/Account/GetUsers',
         dataType: "json",
         data: '{}',
         async: false,
         success: function (result) {
             $.each(result, function (key, value) {
-                $("#selOperation").append($("<option></option>").val(value.UserId).html(value.LoginId + '---' + value.EmployeeId));
+                $("#selOperation").append($("<option></option>").val(value.OperationName).html(value.OperationName));
             });
         },
         error: function () {

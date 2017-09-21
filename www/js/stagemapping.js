@@ -179,8 +179,8 @@ function GetUsers()
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-       //url: 'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetUsers',
-	   url:'http://localhost:51594/api/User/GetUsers',
+       url: 'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetUsers',
+	   //url:'http://localhost:51594/api/User/GetUsers',
 	//url: 'http://182.72.244.25/KPCTSDS/api/Account/GetUsers',
         dataType: "json",
         data: '{}',
@@ -204,8 +204,8 @@ function GetOperations()
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-		url:'http://localhost:51594/api/User/GetOperations',
-       //url: 'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetOperations',
+		//url:'http://localhost:51594/api/User/GetOperations',
+      /url: 'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetOperations',
 	//url: 'http://182.72.244.25/KPCTSDS/api/Account/GetUsers',
         dataType: "json",
         data: '{}',

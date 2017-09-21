@@ -13,7 +13,7 @@ $(document).ready(function (){
     qs();
     GetUsers();GetOperations();
     GetStages();
-    CheckBoxEvents();
+    CheckBoxEvents();document.getElementById("seluser").disabled=true;
 
     $("#home").click(function () {
         $.ajax({
@@ -27,9 +27,15 @@ $(document).ready(function (){
             }
         });
     });
-
-    $('#seluser').dropdown();
+	
 	$('#selOperation').dropdown();
+	$('#selOperation').change(function(){
+        //GetUserStages($(this).val().trim());
+        //GetStages();
+		document.getElementById("seluser").disabled=false;       
+    });
+    $('#seluser').dropdown();
+	
 
     $('#seluser').change(function(){
         GetUserStages($(this).val().trim());
@@ -196,8 +202,8 @@ function GetOperations()
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-    //    url: 'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetUsers',
-	url: 'http://182.72.244.25/KPCTSDS/api/Account/GetUsers',
+       url: 'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetUsers',
+	//url: 'http://182.72.244.25/KPCTSDS/api/Account/GetUsers',
         dataType: "json",
         data: '{}',
         async: false,

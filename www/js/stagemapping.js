@@ -12,7 +12,8 @@ $(document).ready(function (){
     $("#loading").hide();
     qs();
     GetUsers();GetOperations();
-    GetStages();
+	    
+    //GetStages();
     CheckBoxEvents();
 
     $("#home").click(function () {
@@ -31,9 +32,19 @@ $(document).ready(function (){
 	$('#selOperation').dropdown();
 	$('#selOperation').change(function(){
         //GetUserStages($(this).val().trim());
-        //GetStages();
-		document.getElementById("seluser").disabled=false;       
+        GetStages($(this).val().trim());
+		$("#selSAG").empty();
+		$("#selSAG").append("<option value=''>Select Access Group</option>");
+		//document.getElementById("seluser").disabled=false;       
     });
+	
+	$('#selSAG').dropdown();
+	$('#selSAG').change(function(){debugger;
+        //GetUserStages($(this).val().trim());
+        //GetStageAccessGroups($(this).val().trim());
+		//document.getElementById("seluser").disabled=false;       
+    });
+	
     $('#seluser').dropdown();
 	
 
@@ -204,8 +215,8 @@ function GetOperations()
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-		//url:'http://localhost:51594/api/User/GetOperations',
-      /url: 'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetOperations',
+	//url:'http://localhost:51594/api/User/GetOperations',
+      url: 'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetOperations',
 	//url: 'http://182.72.244.25/KPCTSDS/api/Account/GetUsers',
         dataType: "json",
         data: '{}',
@@ -221,13 +232,16 @@ function GetOperations()
     });
 }
 
-function GetStages()
+function GetStages(operation)
 {
+	
     $("#listStage").empty();
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: 'http://202.83.27.199/KPCTSDS/api/Masters/GetStatus',
+		url:'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetStages/'+operation,
+		//url:'http://localhost:51594/api/User/GetStages/'+operation,
+      //  url: 'http://202.83.27.199/KPCTSDS/api/Masters/GetStatus',
 	//url: 'http://182.72.244.25/KPCTSDS/api/Masters/GetStatus',
         dataType: "json",
         data: '{}',
@@ -242,13 +256,38 @@ function GetStages()
                         checked = true;
                 }
                 if(checked)
-                    $("#listStage").append($("<div class='item'><div class='ui fluid child checkbox'><input type='checkbox' name=" + result[i].Id + " checked><label>" + result[i].Name + "</label></div></div>"));
+                    $("#listStage").append($("<div class='item'><div class='ui fluid child checkbox'><input type='checkbox' name=" + result[i].StageId + " checked><label>" + result[i].StageName + "</label></div></div>"));
                 else
-                    $("#listStage").append($("<div class='item'><div class='ui fluid child checkbox'><input type='checkbox' name=" + result[i].Id + "><label>" + result[i].Name + "</label></div></div>"));
+                    $("#listStage").append($("<div class='item'><div class='ui fluid child checkbox'><input type='checkbox' name=" + result[i].StageId + "><label>" + result[i].StageName + "</label></div></div>"));
             }
         },
         error: function () {
             alert("Error occurred while loading Stages.");
+        }
+    });
+	GetStageAccessGroups(operation);
+}
+
+function GetStageAccessGroups(operation)
+{
+	//document.getElementById("seluser").disabled=true;
+    
+    $.ajax({
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+	//url:'http://localhost:51594/api/User/GetStageAccessGroups/'+operation,
+      url: 'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetStageAccessGroups/'+operation,
+	//url: 'http://182.72.244.25/KPCTSDS/api/Account/GetUsers',
+        dataType: "json",
+        data: '{}',
+        async: false,
+        success: function (result) {
+            $.each(result, function (key, value) {
+                $("#selSAG").append($("<option></option>").val(value.StageAccessGroupName).html(value.StageAccessGroupName));
+            });
+        },
+        error: function () {
+            alert("Error occurred while loading Users.");
         }
     });
 }

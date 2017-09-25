@@ -11,8 +11,8 @@ function onBackKeyDown() {
 $(document).ready(function (){
     $("#loading").hide();
     qs();
-    GetUsers();GetOperations();
-	    
+    GetUsers();//GetOperations();
+	GetStageAccessGroups();
     //GetStages();
     CheckBoxEvents();
 
@@ -33,14 +33,20 @@ $(document).ready(function (){
 	$('#selOperation').change(function(){
         //GetUserStages($(this).val().trim());
         GetStages($(this).val().trim());
-		$("#selSAG").empty();
-		$("#selSAG").append("<option value=''>Select Access Group</option>");
+		//GetStageAccessGroups($(this).val().trim());
 		//document.getElementById("seluser").disabled=false;       
     });
 	
 	$('#selSAG').dropdown();
 	$('#selSAG').change(function(){debugger;
         //GetUserStages($(this).val().trim());
+		var skillsSelect = document.getElementById("selSAG");
+		var str = skillsSelect.options[skillsSelect.selectedIndex].text;
+		var val = str.split('---');
+		var operation=val[1];
+		
+		GetStages(operation);
+		GetStageAccessDetails($(this).val().trim());
         //GetStageAccessGroups($(this).val().trim());
 		//document.getElementById("seluser").disabled=false;       
     });
@@ -54,16 +60,14 @@ $(document).ready(function (){
         CheckBoxEvents();
     });
 
-    $("#btnSubmit").click(function() {
+    /* $("#btnSubmit").click(function() {
         var users = "", stages = "";
         var len = $('.list .child.checkbox').length;
         $("#seluser option:selected").each(function () {
             users += $(this).val().trim() + ',';
         });
 
-        /*$("#selstage option:selected").each(function () {
-            stages += $(this).val().trim() + ',';
-        });*/
+        
 
         for(var i = 0; i < len; i++)
         {
@@ -132,7 +136,7 @@ $(document).ready(function (){
                 }
             });
         }
-    });
+    }); */
 });
 
 function CheckBoxEvents()
@@ -239,8 +243,8 @@ function GetStages(operation)
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-		url:'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetStages/'+operation,
-		//url:'http://localhost:51594/api/User/GetStages/'+operation,
+		//url:'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetStages/'+operation,
+		url:'http://localhost:51594/api/User/GetStages/'+operation,
       //  url: 'http://202.83.27.199/KPCTSDS/api/Masters/GetStatus',
 	//url: 'http://182.72.244.25/KPCTSDS/api/Masters/GetStatus',
         dataType: "json",
@@ -265,25 +269,27 @@ function GetStages(operation)
             alert("Error occurred while loading Stages.");
         }
     });
-	GetStageAccessGroups(operation);
+	
 }
 
-function GetStageAccessGroups(operation)
+function GetStageAccessGroups()
 {
-	//document.getElementById("seluser").disabled=true;
-    
+	
+    $("#selSAG").empty();
+    $("#selSAG").append("<option value=''>Select Access Group</option>");
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-	//url:'http://localhost:51594/api/User/GetStageAccessGroups/'+operation,
-      url: 'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetStageAccessGroups/'+operation,
+	url:'http://localhost:51594/api/User/GetStageAccessGroups/',
+    // url: 'http://apps.kpcl.com/KPCLOpsAPI/api/User/GetStageAccessGroups/',
 	//url: 'http://182.72.244.25/KPCTSDS/api/Account/GetUsers',
         dataType: "json",
         data: '{}',
         async: false,
         success: function (result) {
             $.each(result, function (key, value) {
-                $("#selSAG").append($("<option></option>").val(value.StageAccessGroupName).html(value.StageAccessGroupName));
+                $("#selSAG").append($("<option></option>").val(value.StageAccessGroupId).html(value.StageAccessGroupName +'---'+value.Operation));
+				
             });
         },
         error: function () {
@@ -292,11 +298,12 @@ function GetStageAccessGroups(operation)
     });
 }
 
-function GetUserStages(userid)
-{
+function GetStageAccessDetails(SAGId)
+{debugger;
     usrStages = [];
     $.ajax({
-        url: 'http://202.83.27.199/KPCTSDS/api/Account/GetUserStages/' + userid,
+		url: 'http://localhost:51594/api/User/GetSAGStages/' + SAGId,
+       // url: 'http://202.83.27.199/KPCTSDS/api/Account/GetUserStages/' + userid,
 	//url: 'http://182.72.244.25/KPCTSDS/api/Account/GetUserStages/' + userid,
         type: 'GET',
         data: '{}',
@@ -312,6 +319,27 @@ function GetUserStages(userid)
         }
     });
 }
+
+/* function GetUserStages(userid)
+{
+    usrStages = [];
+    $.ajax({
+       // url: 'http://202.83.27.199/KPCTSDS/api/Account/GetUserStages/' + userid,
+	//url: 'http://182.72.244.25/KPCTSDS/api/Account/GetUserStages/' + userid,
+        type: 'GET',
+        data: '{}',
+        dataType: 'json',
+        async: false,
+        success: function (data){
+            if(data.length > 0)
+            {
+                $("#listStage").empty();
+                for(var i = 0; i < data.length; i++)
+                    usrStages.push(data[i]);
+            }
+        }
+    });
+} */
 
 function qs() {
     var query = window.location.search.substring(1);

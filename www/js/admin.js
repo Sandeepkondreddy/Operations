@@ -24,7 +24,7 @@ $(document).ready(function(){
         });
         $(".box7").click(function(){
             $("#loading").show();
-            window.location.href = 'SDS.html?user=' + btoa($("#hidusrid").val()) + '';
+            window.location.href = 'Operations.html?user=' + btoa($("#hidusrid").val()) + '';
         });
 });
 

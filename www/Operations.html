@@ -62,8 +62,7 @@
         </div>
         <br>
         <br>
-        
-            <br>
+
             <br>
 		<div class="container">
             <div class="row">
@@ -72,7 +71,7 @@
                 <div class="col-lg-8">
                     <form class="form-horizontal">
                         <div class="form-group">
-                        <div class="col-lg-3">    <label class="control-label" for="txtag">TagNo</label></div>
+                        <div class="col-lg-3">    <label class="control-label" for="txtag">Tag No</label></div>
                         <div class="col-lg-9 input-group" Style="padding-right: 15px;padding-left: 15px;">
                             <input type="text" id="txttag" readonly="readonly" class="inputtext-readonly" placeholder="Scan Tag No">                               
                
@@ -98,19 +97,54 @@
                                 </span>
                                 <span id="imgSearch" class="input-group-addon">
                                     <i class="fa fa-search fa-lg" aria-hidden="true" style="color: #686868"></i>
-                                </span>
-                            
+                                </span>                            
                         </div>
+                        </div>
+						<div class="form-group">
+                            <label class="col-lg-3" for="txtPStage">Previous Stage</label>
+                            <div class="col-lg-9">
+                                <input type="text" id="txtPStage" readonly="readonly" class="inputtext-readonly" value="">
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label class="col-lg-3" for="txtPStageTime">Previous Stage Time</label>
+                            <div class="col-lg-9">
+                                <input type="text" id="txtPStageTime" readonly="readonly" class="inputtext-readonly" value="">
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label class="col-lg-3" for="txtNStage">Next Stage</label>
+                            <div class="col-lg-9">
+                                <input type="text" id="txtNStage" readonly="readonly" class="inputtext-readonly" value="">
+                            </div>
+                        </div>
+						<div class="form-group" id="divRemarks">
+                            <label class="col-lg-3" for="txtremarks">Remarks</label>
+                            <div class="col-lg-9">
+                                <textarea id="txtremarks" class="inputtext" rows="2" placeholder="Enter Remarks"></textarea>
+                            </div>
+                        </div>
+						
+                        <div class="form-group text-center">
+                            <div class="col-lg-12">
+                                <button type="button" id="btnSubmit" class="btn btn-custom01"><i class="fa fa-check"></i><span> Save</span></button>
+								
+                            </div>
+                        </div>
+                        <div class="form-group text-center">
+                            <div class="col-lg-12">
+                                <button type="button" id="btnClear" class="btn btn-custom"><i class="fa fa-times"></i><span> Clear</span></button>
+                            </div>
                         </div>
                     </form>
                     </div>
                       <div class="col-lg-2 text-left"></div>
+					  
         </div>
 
             <div class="row">
                 <div class="col-lg-2 text-left"></div>
-                <div class="col-lg-8 text-left">
-                    <label id="txtstatus" class="text-success"></label><br>
+                <div class="col-lg-8 text-left">                    
                     <label id="lblerr" class="text-danger"></label>
                 </div>
                 <div class="col-lg-2 text-left"></div>
@@ -120,22 +154,7 @@
                 <div class="col-lg-8"><br>
                     <form class="form-horizontal"> 
 
-                        <div class="form-group" id="divRemarks">
-                            <label class="col-lg-3" for="txtremarks">Remarks</label>
-                            <div class="col-lg-9">
-                                <textarea id="txtremarks" class="inputtext" rows="2" placeholder="Enter Remarks"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group text-center">
-                            <div class="col-lg-12">
-                                <button type="button" id="btnSubmit" class="btn btn-custom"><i class="fa fa-check"></i><span> </span></button>
-                            </div>
-                        </div>
-                        <div class="form-group text-center">
-                            <div class="col-lg-12">
-                                <button type="button" id="btnClear" class="btn btn-custom"><i class="fa fa-times"></i><span> CLEAR</span></button>
-                            </div>
-                        </div>
+                        
                     </form>
                 </div>
                 <div class="col-lg-2 text-left"></div>

@@ -179,7 +179,7 @@ var url = "";
 		function TableCeationMessage()
 		{
 			//document.getElementById('lblmessage').innerHTML = 'Offline User Table Created Successfully.!';
-			alert('Offline Table Created Successfully.!');
+			//alert('Offline Table Created Successfully.!');
 		}
 		function onError(tx, error) // Function for Hendeling Error...
 		{

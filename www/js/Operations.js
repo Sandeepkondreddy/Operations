@@ -39,3 +39,65 @@ function onDeviceReady() {
         lblerr.innerHTML = "";
     });
 }
+
+function scan()
+{
+    cordova.plugins.barcodeScanner.scan(
+        function (result) {
+            if (!result.cancelled) {
+                 $("#txttruckno").val("");
+                 $("#txttag").val(result.text);
+                 //oldvalue = "";
+                 GetDeviceStatus();
+                 GetTag_TruckDetails(result.text);//Added for fetching truck details on QR-Code Scan
+            }
+        },
+        function (error) {
+            alert("Scanning failed: " + error);
+        }
+    );
+}
+
+function scanTruck()
+{
+    cordova.plugins.barcodeScanner.scan(
+        function (result) {
+            if (!result.cancelled) {
+                $("#txttruckno").val(result.text);
+                $("#txttag").val("");
+                //oldvalue = "";
+                GetDeviceStatus();
+                GetTruckDetails(result.text);//Added for fetching truck details on QR-Code Scan
+            }
+        },
+        function (error) {
+            alert("Scanning failed: " + error);
+        }
+    );
+}
+
+$(document).ready(function () {
+	
+	
+	
+	    $("#imgScan").click(function () {
+        $("#loading").show();
+        oldvalue = "";
+        //GetDeviceStatus();
+        scan();
+        //Reason();
+        //GetUserStages($("#hidusrid").val());
+        $("#loading").hide();
+    });
+
+    $("#imgScanTruckNo").click(function () {
+        $("#loading").show();
+        $("#txtstatus").text("");
+        oldvalue = "";
+        //GetDeviceStatus();
+        scanTruck();
+        Reason();
+        //GetUserStages($("#hidusrid").val());
+        $("#loading").hide();
+    });
+	});

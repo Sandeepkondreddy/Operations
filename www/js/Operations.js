@@ -86,7 +86,7 @@ $(document).ready(function () {
         $("#loading").show();
         oldvalue = "";
         //GetDeviceStatus();
-        scan();
+        scanTag();
         //Reason();
         //GetUserStages($("#hidusrid").val());
         $("#loading").hide();

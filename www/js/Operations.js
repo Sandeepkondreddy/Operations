@@ -22,7 +22,7 @@ function onDeviceReady() {
                 //GetTruckDetails(label.data.substring(3));//Added for fetching truck details on NFC read
                 oldvalue = "";
                 GetDeviceStatus();
-                GetTag_TruckDetails(label.data.substring(3));//Added for fetching truck details on NFC read
+                //GetTag_TruckDetails(label.data.substring(3));//Added for fetching truck details on NFC read				
                 //GetDeviceStatus();
                 Reason();
                 GetUserStages($("#hidusrid").val());

@@ -40,7 +40,7 @@ function onDeviceReady() {
     });
 }
 
-function scan()
+function scanTag()
 {
     cordova.plugins.barcodeScanner.scan(
         function (result) {
@@ -48,8 +48,9 @@ function scan()
                  $("#txttruckno").val("");
                  $("#txttag").val(result.text);
                  //oldvalue = "";
-                 GetDeviceStatus();
-                 GetTag_TruckDetails(result.text);//Added for fetching truck details on QR-Code Scan
+                 //GetDeviceStatus();
+                 //GetTag_TruckDetails(result.text);//Added for fetching truck details on QR-Code Scan
+				 alert('Tag No:'+result.text);
             }
         },
         function (error) {
@@ -66,8 +67,9 @@ function scanTruck()
                 $("#txttruckno").val(result.text);
                 $("#txttag").val("");
                 //oldvalue = "";
-                GetDeviceStatus();
-                GetTruckDetails(result.text);//Added for fetching truck details on QR-Code Scan
+               // GetDeviceStatus();
+                //GetTruckDetails(result.text);//Added for fetching truck details on QR-Code Scan
+				alert('Truck No:'+result.text);
             }
         },
         function (error) {
@@ -80,7 +82,7 @@ $(document).ready(function () {
 	
 	
 	
-	    $("#imgScan").click(function () {
+	    $("#imgScanTag").click(function () {
         $("#loading").show();
         oldvalue = "";
         //GetDeviceStatus();

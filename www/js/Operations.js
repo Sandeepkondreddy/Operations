@@ -143,7 +143,7 @@ function GetTagDetails(tagno)
 function clear()
 {
 	$("#btnSubmit span").text('Save');
-	$('#btn_submit').attr('disabled',true);
+	$("#btnSubmit").attr('disabled',true);
     this.submit();
 	$("#hidVTId").val(result[0].VTId);
     $("#txttruckno").val('');
@@ -178,4 +178,9 @@ $(document).ready(function () {
         //GetUserStages($("#hidusrid").val());
         $("#loading").hide();
     });
+	
+	$("#btnClear").click(function() {
+       clear();
+        });
+	
 	});

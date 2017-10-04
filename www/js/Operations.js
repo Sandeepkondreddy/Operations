@@ -53,7 +53,7 @@ function scanTag()
                  //GetDeviceStatus();
 				 GetTagDetails(result.text);
                  //GetTag_TruckDetails(result.text);//Added for fetching truck details on QR-Code Scan
-				 alert('Tag No:'+result.text);
+				 //alert('Tag No:'+result.text);
             }
         },
         function (error) {
@@ -85,6 +85,7 @@ function scanTruck()
 function GetTagDetails(tagno)
 {
     var TagNo = tagno == "" ? "" : tagno;
+	$("#loading").show();
     if(TagNo != "")
     {
         $.ajax({
@@ -105,8 +106,8 @@ function GetTagDetails(tagno)
 					$("#txtOperation").val(result[0].Operation);
 					$("#btnSubmit span").text(result[0].NextStageName);
 					$("#hidNStageId").val(result[0].NextStageId);
-                    $("#btnSubmit").show();
-                    $("#btnClear").show();
+                    //$("#btnSubmit").show();
+                    //$("#btnClear").show();
                    /*  if(oldvalue == "")
                         oldvalue = result[0].NextStatus;
                     $("#btnSubmit").attr('disabled', false);
@@ -139,6 +140,18 @@ function GetTagDetails(tagno)
     }
 }
 
+function clear()
+{
+	$("#btnSubmit span").text('Save');
+	$('#btn_submit').attr('disabled',true);
+    this.submit();
+	$("#hidVTId").val(result[0].VTId);
+    $("#txttruckno").val('');
+    $("#txtOpCode").val('');
+    $("#txtCStage").val('');
+	$("#txtOperation").val('');	
+	$("#hidNStageId").val(result[0].NextStageId);
+}
 
 $(document).ready(function () {
 	
@@ -146,6 +159,7 @@ $(document).ready(function () {
 	
 	    $("#imgScanTag").click(function () {
         $("#loading").show();
+		clear();
         oldvalue = "";
         //GetDeviceStatus();
         scanTag();

@@ -88,9 +88,9 @@ function GetTagDetails(tagno)
     if(TagNo != "")
     {
         $.ajax({
-			url: 'http://localhost:51594/api/Operations/GetTagDetails/' + TagNo,
-           // url: 'http://202.83.27.199/KPCTSDS/api/TruckDetails/GetTagTruckDetails/' + TagNo,
-	    //url: 'http://182.72.244.25/KPCTSDS/api/TruckDetails/GetTagTruckDetails/' + TagNo,
+			//url: 'http://localhost:51594/api/Operations/GetTagDetails/' + TagNo,
+           url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/GetTagDetails/' + TagNo,
+
             type: 'GET',
             data: '{}',
             dataType: 'json',

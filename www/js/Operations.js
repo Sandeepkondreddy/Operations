@@ -146,7 +146,7 @@ function clear()
 	$("#btnSubmit").attr('disabled',true);
     //this.submit();
 	hidVTId.value="";
-    txttruckno.value="";;
+    txttruckno.value="";
     txtOpCode.value="";
     txtCStage.value="";
 	txtOperation.value="";

@@ -144,7 +144,7 @@ function clear()
 {
 	$("#btnSubmit span").text('Save');
 	$("#btnSubmit").attr('disabled',true);
-    this.submit();
+    //this.submit();
 	$("#hidVTId").val(result[0].VTId);
     $("#txttruckno").val('');
     $("#txtOpCode").val('');

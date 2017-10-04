@@ -155,11 +155,10 @@ function clear()
 
 $(document).ready(function () {
 	
-	
+		clear();
 	
 	    $("#imgScanTag").click(function () {
-        $("#loading").show();
-		clear();
+        $("#loading").show();	
         oldvalue = "";
         //GetDeviceStatus();
         scanTag();

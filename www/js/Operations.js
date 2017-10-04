@@ -51,6 +51,7 @@ function scanTag()
                  $("#txttag").val(result.text);
                  //oldvalue = "";
                  //GetDeviceStatus();
+				 GetTagDetails(result.text);
                  //GetTag_TruckDetails(result.text);//Added for fetching truck details on QR-Code Scan
 				 alert('Tag No:'+result.text);
             }
@@ -100,7 +101,7 @@ function GetTagDetails(tagno)
                     $("#txttruckno").val(result[0].TruckNo);
                     $("#txtOpCode").val(result[0].OperationCode);
                     $("#txtCStage").val(result[0].CurrentStageName);
-					$("#txtCStageTime").val(result[0].CurrentStageId);
+					//$("#txtCStageTime").val(result[0].CurrentStageId);
 					$("#txtOperation").val(result[0].Operation);
 					$("#btnSubmit span").text(result[0].NextStageName);
 					$("#hidNStageId").val(result[0].NextStageId);

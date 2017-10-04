@@ -20,14 +20,14 @@ function onDeviceReady() {
                 btnSubmit.style.display = 'none';
                 btnClear.style.display = 'none';
 				//document.getElementById("btnSubmit").disabled = true;
-				$("#btnSubmit").prop('disabled', true);
+				
                 //GetTruckDetails(label.data.substring(3));//Added for fetching truck details on NFC read
                 oldvalue = "";
-                GetDeviceStatus();
+                //GetDeviceStatus();
                 //GetTag_TruckDetails(label.data.substring(3));//Added for fetching truck details on NFC read				
                 //GetDeviceStatus();
-                Reason();
-                GetUserStages($("#hidusrid").val());
+                //Reason();
+                //GetUserStages($("#hidusrid").val());
                 $("#loading").hide();
             },
             function(){
@@ -106,6 +106,7 @@ function GetTagDetails(tagno)
 					$("#txtOperation").val(result[0].Operation);
 					$("#btnSubmit span").text(result[0].NextStageName);
 					$("#hidNStageId").val(result[0].NextStageId);
+					validateuserstage(result[0].NextStageId);
                 }
                 else {
                     $("#lblerr").text("No Data Found");
@@ -146,6 +147,7 @@ function GetTruckDetails(truckno)
 					$("#txtOperation").val(result[0].Operation);
 					$("#btnSubmit span").text(result[0].NextStageName);
 					$("#hidNStageId").val(result[0].NextStageId);
+					validateuserstage(result[0].NextStageId);
                 }
                 else {
                     $("#lblerr").text("No Data Found");
@@ -156,10 +158,41 @@ function GetTruckDetails(truckno)
             error: function () {
                 alert('Error occurred while loading Truck details.');
                 //$("#imgtruck").hide();
-                $("#loading").hide();
+                
             }
         });
     }
+	$("#loading").hide();
+}
+
+function validateuserstage(stageid){
+	var StageId = stageid == "" ? "" : stageid;	
+    if(StageId != "")
+    {
+        $.ajax({
+			//url: 'http://localhost:51594/api/Operations/GetTruckDetails/' + TagNo,
+           url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/ValidateUserStage/' + StageId+ "/" + $("#hidusrid").val(), 
+
+            type: 'GET',
+            data: '{}',
+            dataType: 'application/json',
+            async: false,
+            success: function (data) {
+                if (data[1] == 'True') {
+					$("#btnSubmit").attr('disabled',false);
+                }
+                else {
+					$("#btnSubmit").attr('disabled',true);
+                }
+            },
+            error: function () {
+                alert('Error occurred while loading Truck details.');
+                //$("#imgtruck").hide();
+                
+            }
+        });
+    }
+	
 }
 
 function clear()
@@ -177,7 +210,8 @@ function clear()
 }
 
 $(document).ready(function () {
-	
+	$("#hidusrid").val(atob(qsParm["user"]));
+	alert($("#hidusrid").val());
 		clear();
 	
 	    $("#imgScanTag").click(function () {

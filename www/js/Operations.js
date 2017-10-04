@@ -145,12 +145,12 @@ function clear()
 	$("#btnSubmit span").text('Save');
 	$("#btnSubmit").attr('disabled',true);
     //this.submit();
-	$("#hidVTId").val(result[0].VTId);
-    $("#txttruckno").val('');
-    $("#txtOpCode").val('');
-    $("#txtCStage").val('');
-	$("#txtOperation").val('');	
-	$("#hidNStageId").val(result[0].NextStageId);
+	hidVTId.value="";
+    txttruckno.value="";;
+    txtOpCode.value="";
+    txtCStage.value="";
+	txtOperation.value="";
+	hidNStageId.value="";
 }
 
 $(document).ready(function () {

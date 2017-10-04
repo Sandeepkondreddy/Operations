@@ -87,7 +87,8 @@ function GetTagDetails(tagno)
     if(TagNo != "")
     {
         $.ajax({
-            url: 'http://202.83.27.199/KPCTSDS/api/TruckDetails/GetTagTruckDetails/' + TagNo,
+			url: 'http://localhost:51594/api/Operations/GetTagDetails/' + TagNo,
+           // url: 'http://202.83.27.199/KPCTSDS/api/TruckDetails/GetTagTruckDetails/' + TagNo,
 	    //url: 'http://182.72.244.25/KPCTSDS/api/TruckDetails/GetTagTruckDetails/' + TagNo,
             type: 'GET',
             data: '{}',
@@ -95,9 +96,14 @@ function GetTagDetails(tagno)
             async: false,
             success: function (result) {
                 if (result.length > 0) {
+					$("#hidVTId").val(result[0].VTId);
                     $("#txttruckno").val(result[0].TruckNo);
-                    $("#txtparty").val(result[0].Party);
-                    
+                    $("#txtOpCode").val(result[0].OperationCode);
+                    $("#txtCStage").val(result[0].CurrentStageName);
+					$("#txtCStageTime").val(result[0].CurrentStageId);
+					$("#txtOperation").val(result[0].Operation);
+					$("#btnSubmit span").text(result[0].NextStageName);
+					$("#hidNStageId").val(result[0].NextStageId);
                     $("#btnSubmit").show();
                     $("#btnClear").show();
                    /*  if(oldvalue == "")

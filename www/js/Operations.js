@@ -110,7 +110,7 @@ function GetTagDetails(tagno)
 					        $.ajax({
 									//url: 'http://localhost:51594/api/Operations/GetTruckDetails/' + TagNo,
 								   url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/ValidateUserStage/' + result[0].NextStageId+ "/" + $("#hidusrid").val(), 
-
+									alert(result[0].NextStageId+ "/" + $("#hidusrid").val());
 									type: 'GET',
 									data: '{}',
 									dataType: 'application/json',
@@ -194,7 +194,7 @@ function validateuserstage(stageid){
         $.ajax({
 			//url: 'http://localhost:51594/api/Operations/GetTruckDetails/' + TagNo,
            url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/ValidateUserStage/' + StageId+ "/" + $("#hidusrid").val(), 
-
+				alert(url);
             type: 'GET',
             data: '{}',
             dataType: 'application/json',

@@ -106,7 +106,29 @@ function GetTagDetails(tagno)
 					$("#txtOperation").val(result[0].Operation);
 					$("#btnSubmit span").text(result[0].NextStageName);
 					$("#hidNStageId").val(result[0].NextStageId);
-					validateuserstage(result[0].NextStageId);
+					//validateuserstage(result[0].NextStageId);
+					        $.ajax({
+									//url: 'http://localhost:51594/api/Operations/GetTruckDetails/' + TagNo,
+								   url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/ValidateUserStage/' + result[0].NextStageId+ "/" + $("#hidusrid").val(), 
+
+									type: 'GET',
+									data: '{}',
+									dataType: 'application/json',
+									async: false,
+									success: function (data) {
+										if (data[1] == 'True') {
+											$("#btnSubmit").attr('disabled',false);
+										}
+										else {
+											$("#btnSubmit").attr('disabled',true);
+										}
+									},
+									error: function () {
+										alert('Error occurred while loading Stage Access details.');
+										//$("#imgtruck").hide();
+										
+									}
+								});
                 }
                 else {
                     $("#lblerr").text("No Data Found");
@@ -186,7 +208,7 @@ function validateuserstage(stageid){
                 }
             },
             error: function () {
-                alert('Error occurred while loading Truck details.');
+                alert('Error occurred while loading Stage Access details.');
                 //$("#imgtruck").hide();
                 
             }

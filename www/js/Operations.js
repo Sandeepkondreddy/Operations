@@ -106,11 +106,12 @@ function GetTagDetails(tagno)
 					$("#txtOperation").val(result[0].Operation);
 					$("#btnSubmit span").text(result[0].NextStageName);
 					$("#hidNStageId").val(result[0].NextStageId);
+					alert(result[0].NextStageId+ "/" + $("#hidusrid").val());
 					//validateuserstage(result[0].NextStageId);
 					        $.ajax({
 									//url: 'http://localhost:51594/api/Operations/GetTruckDetails/' + TagNo,
-								   url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/ValidateUserStage/' + result[0].NextStageId+ "/" + $("#hidusrid").val(), 
-									alert(result[0].NextStageId+ "/" + $("#hidusrid").val());
+								   url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/ValidateUserStage/' + result[0].NextStageId+ '/' + $("#hidusrid").val(), 
+									
 									type: 'GET',
 									data: '{}',
 									dataType: 'application/json',
@@ -188,6 +189,7 @@ function GetTruckDetails(truckno)
 }
 
 function validateuserstage(stageid){
+	alert(stageid); 
 	var StageId = stageid == "" ? "" : stageid;	
     if(StageId != "")
     {

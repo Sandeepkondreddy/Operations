@@ -188,14 +188,14 @@ function GetTruckDetails(truckno)
 }
 
 function validateuserstage(stageid){
-	//alert(stageid); 
+	alert(stageid); 
 	var StageId = stageid == "" ? "" : stageid;	
     if(StageId != "")
     {
         $.ajax({
 			//url: 'http://localhost:51594/api/Operations/GetTruckDetails/' + TagNo,
            url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/ValidateUserStage/' + StageId+ "/" + $("#hidusrid").val(), 
-				alert(url);
+			//alert(url);
             type: 'GET',
             data: '{}',
             dataType: 'application/json',
@@ -222,7 +222,7 @@ function clear()
 {
 	$("#btnSubmit span").text('Save');
 	$("#btnSubmit").attr('disabled',true);
-    this.submit();
+    //this.submit();
 	txttag.value="";
 	hidVTId.value="";
     txttruckno.value="";

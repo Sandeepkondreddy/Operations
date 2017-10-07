@@ -222,7 +222,7 @@ function clear()
 {
 	$("#btnSubmit span").text('Save');
 	$("#btnSubmit").attr('disabled',true);
-    //this.submit();
+    this.submit();
 	txttag.value="";
 	hidVTId.value="";
     txttruckno.value="";

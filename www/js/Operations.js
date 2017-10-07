@@ -107,8 +107,8 @@ function GetTagDetails(tagno)
 					$("#btnSubmit span").text(result[0].NextStageName);
 					$("#hidNStageId").val(result[0].NextStageId);
 					alert(result[0].NextStageId+ "/" + $("#hidusrid").val());
-					var tag=result[0].NextStageId;alert(tag);
-					//validateuserstage(result[0].NextStageId);
+					var Nstageid=result[0].NextStageId;//alert(tag);
+					validateuserstage(Nstageid);
 					        /* $.ajax({									
 								   url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/ValidateUserStage/' + result[0].NextStageId+ '/' + $("#hidusrid").val(), 
 									

@@ -196,13 +196,15 @@ function validateuserstage(stageid){
 		alert(StageId); 
         $.ajax({
 			//url: 'http://localhost:51594/api/Operations/GetTruckDetails/' + TagNo,
-           url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/ValidateUserStage/' + StageId+ "/" + $("#hidusrid").val(), 
+           url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/ValidateUserStage/' + StageId+ '/' + $("#hidusrid").val(), 
 			//alert(url);
             type: 'GET',
             data: '{}',
             dataType: 'application/json',
             async: false,
             success: function (data) {
+				alert(data[0]);
+				alert(data[1]);
                 if (data[1] == 'True') {
 					$("#btnSubmit").attr('disabled',false);
                 }

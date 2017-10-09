@@ -52,8 +52,8 @@ function scanTag()
                  //oldvalue = "";
                  //GetDeviceStatus();
 				 GetTagDetails(result.text);
-				 alert($("#hidNStageId").val);
-				 validateuserstage($("#hidNStageId").val);
+				 alert($("#hidNStageId").val());
+				 validateuserstage($("#hidNStageId").val());
                  //GetTag_TruckDetails(result.text);//Added for fetching truck details on QR-Code Scan
 				 //alert('Tag No:'+result.text);
             }

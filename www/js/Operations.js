@@ -52,8 +52,8 @@ function scanTag()
                  //oldvalue = "";
                  //GetDeviceStatus();
 				 GetTagDetails(result.text);
-				 alert($("#hidNStageId").val());
-				 //validateuserstage($("#hidNStageId").val());
+				 //alert($("#hidNStageId").val());
+				 VaalidateUserStage($("#hidNStageId").val());
                  
 				 //alert('Tag No:'+result.text);
             }
@@ -108,30 +108,6 @@ function GetTagDetails(tagno)
 					$("#txtOperation").val(result[0].Operation);
 					$("#btnSubmit span").text(result[0].NextStageName);
 					$("#hidNStageId").val(result[0].NextStageId);
-					alert(result[0].NextStageId+ "/" + $("#hidusrid").val());
-					var Nstageid=result[0].NextStageId;
-					//validateuserstage(Nstageid);
-					        /* $.ajax({									
-								   url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/ValidateUserStage/' + result[0].NextStageId+ '/' + $("#hidusrid").val(), 
-									
-									type: 'GET',
-									data: '{}',
-									dataType: 'application/json',
-									async: false,
-									success: function (data) {
-										if (data[1] == 'True') {
-											$("#btnSubmit").attr('disabled',false);
-										}
-										else {
-											$("#btnSubmit").attr('disabled',true);
-										}
-									},
-									error: function () {
-										alert('Error occurred while loading Stage Access details.');
-										
-										
-									}
-								}); */
                 }
                 else {
                     $("#lblerr").text("No Data Found");
@@ -190,7 +166,7 @@ function GetTruckDetails(truckno)
 	$("#loading").hide();
 }
 
-function validateuserstage(stageid){
+/* function validateuserstage(stageid){
 	
 	var StageId = stageid == "" ? "" : stageid;	
     if(StageId != "")
@@ -220,6 +196,45 @@ function validateuserstage(stageid){
         });
     }
 	
+} */
+
+function VaalidateUserStage(stageid)
+{
+    var StageId = stageid == "" ? "" : stageid;
+	$("#loading").show();
+    if(StageId != "")
+    {
+		var testdata=StageId + '/' + $("#hidusrid").val();
+		alert(testdata);
+        $.ajax({
+		   url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/ValidateUserStage/' + StageId + '/' + $("#hidusrid").val(),
+            type: 'GET',
+            data: '{}',
+            dataType: 'json',
+            async: false,
+            success: function (result) {
+                if (result.length > 0) {
+					alert(result[1]);
+					/* if (data[1] == 'True') {
+						$("#btnSubmit").attr('disabled',false);
+						}
+						else {
+							$("#btnSubmit").attr('disabled',true);
+						} */
+                }
+                else {
+                    $("#lblerr").text("No Data Found");
+                    $("#txttag").val("");//clearing the Tag details in case of no data found for tag
+                    $("#lblerr").attr('class', 'text-danger');
+                }
+            },
+            error: function () {
+                alert('Error occurred while loading Usare Stage details.');
+                //$("#imgtruck").hide();
+                $("#loading").hide();
+            }
+        });
+    }
 }
 
 function clear()
@@ -275,7 +290,7 @@ $(document).ready(function () {debugger;
         
         //GetDeviceStatus();
         scanTruck();
-        Reason();
+        //Reason();
         //GetUserStages($("#hidusrid").val());
         $("#loading").hide();
     });

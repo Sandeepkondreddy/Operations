@@ -42,6 +42,10 @@ function onDeviceReady() {
     });
 }
 
+function callback(imei) {
+    $("#DeviceId").val(imei);	
+}
+
 function scanTag()
 {
     cordova.plugins.barcodeScanner.scan(
@@ -66,16 +70,40 @@ function scanTruck()
             if (!result.cancelled) {
                 $("#txttruckno").val(result.text);
                 $("#txttag").val("");
-                //oldvalue = "";
-               // GetDeviceStatus();
-                //GetTruckDetails(result.text);//Added for fetching truck details on QR-Code Scan
-				alert('Truck No:'+result.text);
+                GetTruckDetails(result.text);//Added for fetching truck details on QR-Code Scan
+				
             }
         },
         function (error) {
             alert("Scanning failed: " + error);
         }
     );
+}
+
+function SaveOperationDetails(){
+	alert('Save: SaveOperationDetails');
+	var Adddata = {};
+			Adddata.VTId= document.getElementById('hidVTId').value;
+			Adddata.StageId=document.getElementById('hidNStageId').value;
+			Adddata.DeviceId = document.getElementById('hidDeviceId').value;
+			Adddata.Remarks = $("#txtremarks").val();
+			Adddata.Operation=$("#txtOperation").val();
+            //Adddata.GeoLocation = document.getElementById('geolocation').innerHTML;            
+            Adddata.UserId = $("#hidusrid").val();
+            $.ajax({
+                type: 'POST',
+                url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/SaveOperationDetails',		
+                dataType: "json",
+                data: Adddata,
+                success: function (result) {
+                    alert('Data Saved Successfully.');                    
+                },
+                error: function (xhr, status, error) {
+                    alert('Error occurred while saving the data.\n\r');
+                    
+                }
+            });
+	
 }
 
 
@@ -127,7 +155,6 @@ function GetTruckDetails(truckno)
     if(TruckNo != "")
     {
         $.ajax({
-			//url: 'http://localhost:51594/api/Operations/GetTruckDetails/' + TagNo,
            url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/GetTruckDetails/' + TruckNo,
 
             type: 'GET',
@@ -162,37 +189,7 @@ function GetTruckDetails(truckno)
 	$("#loading").hide();
 }
 
-/* function validateuserstage(stageid){
-	
-	var StageId = stageid == "" ? "" : stageid;	
-    if(StageId != "")
-    {
-		alert(StageId); 
-        $.ajax({
-			//url: 'http://localhost:51594/api/Operations/GetTruckDetails/' + TagNo,
-            url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/ValidateUserStage/' + StageId + '/' + $("#hidusrid").val(), 
-            type: 'GET',
-            data: '{}',
-            dataType: 'json',
-            async: false,
-            success: function (data) {
-					alert(data[1]);
-                if (data[1] == 'True') {
-					$("#btnSubmit").attr('disabled',false);
-                }
-                else {
-					$("#btnSubmit").attr('disabled',true);
-                }
-            },
-            error: function () {
-                alert('Error occurred while loading Stage Access details.');
-                //$("#imgtruck").hide();
-                
-            }
-        });
-    }
-	
-} */
+
 
 function VaalidateUserStage(stageid)
 {
@@ -200,8 +197,7 @@ function VaalidateUserStage(stageid)
 	$("#loading").show();
     if(StageId != "")
     {
-		var testdata=StageId + '/' + $("#hidusrid").val();
-		alert(testdata);
+
         $.ajax({
 		   url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/ValidateUserStage/' + $("#hidusrid").val() + '/' + StageId,
             type: 'GET',
@@ -267,14 +263,14 @@ function qs() {
         return false;
     }
 }
-$(document).ready(function () {debugger;
+$(document).ready(function () {
 	qs();
 	
 	//alert($("#hidusrid").val());
 	 
 		clear();
 	
-	    $("#imgScanTag").click(function () {
+	$("#imgScanTag").click(function () {
 		$("#lblMsg").text("");
         $("#loading").show();	
         scanTag();
@@ -289,6 +285,19 @@ $(document).ready(function () {debugger;
         $("#loading").hide();
     });
 	
+	$("#imgSearch").click(function () {debugger;
+		$("#loading").show();
+        $("#lblMsg").text("");
+		if ($("#txttruckno").val() == "") {
+            alert('Please Enter Truck No.');             
+            $("#txttruckno").focus();
+            return false;
+        }
+		else GetTruckDetails($("#txttruckno").val());
+       
+        $("#loading").hide();
+	});
+	
 	$("#btnSubmit").click(function () {
         $("#loading").show();
 		$("#btnSubmit").attr('disabled',true);
@@ -297,6 +306,7 @@ $(document).ready(function () {debugger;
 		$("#imgScanTruckNo").attr('disabled',true);
         $("#lblMsg").text("");
 		alert('Save..');
+		SaveOperationDetails();
 		$("#imgScanTag").attr('disabled',false);
 		$("#imgScanTruckNo").attr('disabled',false);
 		$("#btnClear").attr('disabled',false);

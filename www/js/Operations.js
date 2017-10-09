@@ -22,7 +22,7 @@ function onDeviceReady() {
 				//document.getElementById("btnSubmit").disabled = true;
 				
                 //GetTruckDetails(label.data.substring(3));//Added for fetching truck details on NFC read
-                oldvalue = "";
+                //oldvalue = "";
                 //GetDeviceStatus();
                 //GetTag_TruckDetails(label.data.substring(3));//Added for fetching truck details on NFC read				
                 //GetDeviceStatus();
@@ -43,7 +43,8 @@ function onDeviceReady() {
 }
 
 function callback(imei) {
-    $("#DeviceId").val(imei);	
+    $("#DeviceId").val(imei);
+	alert(imei);	
 }
 
 function scanTag()
@@ -81,7 +82,7 @@ function scanTruck()
 }
 
 function SaveOperationDetails(){
-	alert('Save: SaveOperationDetails');
+	//alert('Save: SaveOperationDetails');
 	var Adddata = {};
 			Adddata.VTId= document.getElementById('hidVTId').value;
 			Adddata.StageId=document.getElementById('hidNStageId').value;
@@ -96,7 +97,8 @@ function SaveOperationDetails(){
                 dataType: "json",
                 data: Adddata,
                 success: function (result) {
-                    alert('Data Saved Successfully.');                    
+                    alert('Data Saved Successfully.');
+					clear();                    
                 },
                 error: function (xhr, status, error) {
                     alert('Error occurred while saving the data.\n\r');
@@ -241,6 +243,7 @@ function clear()
     txtCStage.value="";
 	txtOperation.value="";
 	hidNStageId.value="";
+	
 }
 function qs() {
     var query = window.location.search.substring(1);
@@ -305,7 +308,7 @@ $(document).ready(function () {
 		$("#imgScanTag").attr('disabled',true);
 		$("#imgScanTruckNo").attr('disabled',true);
         $("#lblMsg").text("");
-		alert('Save..');
+		//alert('Save..');
 		SaveOperationDetails();
 		$("#imgScanTag").attr('disabled',false);
 		$("#imgScanTruckNo").attr('disabled',false);

@@ -291,8 +291,15 @@ $(document).ready(function () {debugger;
 	
 	$("#btnSubmit").click(function () {
         $("#loading").show();
+		$("#btnSubmit").attr('disabled',true);
+		$("#btnClear").attr('disabled',true);
+		$("#imgScanTag").attr('disabled',true);
+		$("#imgScanTruckNo").attr('disabled',true);
         $("#lblMsg").text("");
-			
+		alert('Save..');
+		$("#imgScanTag").attr('disabled',false);
+		$("#imgScanTruckNo").attr('disabled',false);
+		$("#btnClear").attr('disabled',false);
         $("#loading").hide();
     });
 	

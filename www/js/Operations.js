@@ -52,6 +52,8 @@ function scanTag()
                  //oldvalue = "";
                  //GetDeviceStatus();
 				 GetTagDetails(result.text);
+				 alert($("#hidNStageId").val);
+				 validateuserstage($("#hidNStageId").val);
                  //GetTag_TruckDetails(result.text);//Added for fetching truck details on QR-Code Scan
 				 //alert('Tag No:'+result.text);
             }
@@ -107,8 +109,8 @@ function GetTagDetails(tagno)
 					$("#btnSubmit span").text(result[0].NextStageName);
 					$("#hidNStageId").val(result[0].NextStageId);
 					alert(result[0].NextStageId+ "/" + $("#hidusrid").val());
-					var Nstageid=result[0].NextStageId;//alert(tag);
-					validateuserstage(Nstageid);
+					var Nstageid=result[0].NextStageId;
+					//validateuserstage(Nstageid);
 					        /* $.ajax({									
 								   url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/ValidateUserStage/' + result[0].NextStageId+ '/' + $("#hidusrid").val(), 
 									

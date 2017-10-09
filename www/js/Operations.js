@@ -6,7 +6,7 @@ function onDeviceReady() {
     $("#hiduuid").val(device.uuid);
     window.plugins.imeiplugin.getImei(callback);
     nfc.enabled(function(){        
-        lblerr.innerHTML = "Tap nfc tag to read";
+        lblMsg.innerHTML = "Tap nfc tag to read";
         nfc.addNdefListener(
             function (record){
                 $("#loading").show();
@@ -16,7 +16,7 @@ function onDeviceReady() {
                 //txttruckno.value = label.data.substring(3);
                 txttag.value=label.data.substring(3);
                 txttruckno.value="";
-                lblerr.innerHTML = "";
+                lblMsg.innerHTML = "";
                 btnSubmit.style.display = 'none';
                 btnClear.style.display = 'none';
 				//document.getElementById("btnSubmit").disabled = true;
@@ -31,14 +31,14 @@ function onDeviceReady() {
                 $("#loading").hide();
             },
             function(){
-                lblerr.innerHTML = "";
+                lblMsg.innerHTML = "";
             },
             function(){
-                lblerr.innerHTML = "Error in reading tag.";
+                lblMsg.innerHTML = "Error in reading tag.";
         });
     },
     function(){
-        lblerr.innerHTML = "";
+        lblMsg.innerHTML = "";
     });
 }
 
@@ -49,13 +49,8 @@ function scanTag()
             if (!result.cancelled) {
                  $("#txttruckno").val("");
                  $("#txttag").val(result.text);
-                 //oldvalue = "";
-                 //GetDeviceStatus();
-				 GetTagDetails(result.text);
-				 //alert($("#hidNStageId").val());
-				 VaalidateUserStage($("#hidNStageId").val());
-                 
-				 //alert('Tag No:'+result.text);
+				 GetTagDetails(result.text);				 
+				 //VaalidateUserStage($("#hidNStageId").val());
             }
         },
         function (error) {
@@ -108,11 +103,12 @@ function GetTagDetails(tagno)
 					$("#txtOperation").val(result[0].Operation);
 					$("#btnSubmit span").text(result[0].NextStageName);
 					$("#hidNStageId").val(result[0].NextStageId);
+					 VaalidateUserStage($("#hidNStageId").val());
                 }
                 else {
-                    $("#lblerr").text("No Data Found");
+                    $("#lblMsg").text("No Data Found");
                     $("#txttag").val("");//clearing the Tag details in case of no data found for tag
-                    $("#lblerr").attr('class', 'text-danger');
+                    $("#lblMsg").attr('class', 'text-danger');
                 }
             },
             error: function () {
@@ -148,12 +144,12 @@ function GetTruckDetails(truckno)
 					$("#txtOperation").val(result[0].Operation);
 					$("#btnSubmit span").text(result[0].NextStageName);
 					$("#hidNStageId").val(result[0].NextStageId);
-					validateuserstage(result[0].NextStageId);
+					 VaalidateUserStage($("#hidNStageId").val());
                 }
                 else {
-                    $("#lblerr").text("No Data Found");
-                    $("#txttag").val("");//clearing the Tag details in case of no data found for tag
-                    $("#lblerr").attr('class', 'text-danger');
+                    $("#lblMsg").text("No Data Found.");
+                    //$("#txttruckno").val("");//clearing the Truck details in case of no data found for tag
+                    $("#lblMsg").attr('class', 'text-danger');
                 }
             },
             error: function () {
@@ -223,9 +219,9 @@ function VaalidateUserStage(stageid)
 						}
                 }
                 else {
-                    $("#lblerr").text("No Data Found");
-                    $("#txttag").val("");//clearing the Tag details in case of no data found for tag
-                    $("#lblerr").attr('class', 'text-danger');
+                    $("#lblMsg").text("No Data Found");
+                    //$("#txttag").val("");//clearing the Tag details in case of no data found for tag
+                    $("#lblMsg").attr('class', 'text-danger');
                 }
             },
             error: function () {
@@ -275,23 +271,28 @@ $(document).ready(function () {debugger;
 	qs();
 	
 	//alert($("#hidusrid").val());
+	 
 		clear();
 	
 	    $("#imgScanTag").click(function () {
+		$("#lblMsg").text("");
         $("#loading").show();	
         scanTag();
-        //GetUserStages($("#hidusrid").val());
+        
         $("#loading").hide();
     });
 
     $("#imgScanTruckNo").click(function () {
         $("#loading").show();
-        $("#txtstatus").text("");
-        
-        //GetDeviceStatus();
+         $("#lblMsg").text("");
         scanTruck();
-        //Reason();
-        //GetUserStages($("#hidusrid").val());
+        $("#loading").hide();
+    });
+	
+	$("#btnSubmit").click(function () {
+        $("#loading").show();
+        $("#lblMsg").text("");
+			
         $("#loading").hide();
     });
 	

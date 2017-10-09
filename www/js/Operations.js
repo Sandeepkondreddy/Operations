@@ -203,8 +203,7 @@ function validateuserstage(stageid){
             dataType: 'application/json',
             async: false,
             success: function (data) {
-				alert(data[0]);
-				alert(data[1]);
+					alert(data[1]);
                 if (data[1] == 'True') {
 					$("#btnSubmit").attr('disabled',false);
                 }

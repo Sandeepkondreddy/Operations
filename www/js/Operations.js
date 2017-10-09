@@ -207,7 +207,7 @@ function VaalidateUserStage(stageid)
 		var testdata=StageId + '/' + $("#hidusrid").val();
 		alert(testdata);
         $.ajax({
-		   url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/ValidateUserStage/' + StageId + '/' + $("#hidusrid").val(),
+		   url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/ValidateUserStage/' + $("#hidusrid").val() + '/' + StageId,
             type: 'GET',
             data: '{}',
             dataType: 'json',
@@ -215,12 +215,12 @@ function VaalidateUserStage(stageid)
             success: function (result) {
                 if (result.length > 0) {
 					alert(result[1]);
-					/* if (data[1] == 'True') {
+					if (result[1] == 'True') {
 						$("#btnSubmit").attr('disabled',false);
 						}
 						else {
 							$("#btnSubmit").attr('disabled',true);
-						} */
+						}
                 }
                 else {
                     $("#lblerr").text("No Data Found");

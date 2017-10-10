@@ -43,8 +43,8 @@ function onDeviceReady() {
 }
 
 function callback(imei) {
-    $("#DeviceId").val(imei);
-	alert(imei);	
+    $("#hidDeviceId").val(imei);
+	//alert(imei);	
 }
 
 function scanTag()
@@ -244,7 +244,7 @@ function clear()
     txtCStage.value="";
 	txtOperation.value="";
 	hidNStageId.value="";
-	
+	alert(document.getElementById('hidDeviceId').value);
 }
 function qs() {
     var query = window.location.search.substring(1);

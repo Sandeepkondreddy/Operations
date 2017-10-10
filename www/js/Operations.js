@@ -71,7 +71,7 @@ function scanTruck()
             if (!result.cancelled) {
                 $("#txttruckno").val(result.text);
                 $("#txttag").val("");
-                GetTruckDetails(result.text);//Added for fetching truck details on QR-Code Scan
+                GetTruckDetails(result.text.toUpperCase());//Added for fetching truck details on QR-Code Scan
 				
             }
         },
@@ -157,7 +157,8 @@ function GetTruckDetails(truckno)
     if(TruckNo != "")
     {
         $.ajax({
-           url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/GetTruckDetails/' + TruckNo,
+			url: 'http://localhost:51594/api/Operations/GetTruckDetails/' + TruckNo,
+           //url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/GetTruckDetails/' + TruckNo,
 
             type: 'GET',
             data: '{}',

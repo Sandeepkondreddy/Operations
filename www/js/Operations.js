@@ -2,7 +2,6 @@ var qsParm = new Array(), oldvalue = "";
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
-    
     $("#hiduuid").val(device.uuid);
     window.plugins.imeiplugin.getImei(callback);
     nfc.enabled(function(){        
@@ -245,7 +244,7 @@ function clear()
     txtCStage.value="";
 	txtOperation.value="";
 	hidNStageId.value="";
-	alert(document.getElementById('hidDeviceId').value);
+	//alert(document.getElementById('hidDeviceId').value);
 }
 function qs() {
     var query = window.location.search.substring(1);

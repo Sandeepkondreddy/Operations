@@ -157,8 +157,8 @@ function GetTruckDetails(truckno)
     if(TruckNo != "")
     {
         $.ajax({
-			url: 'http://localhost:51594/api/Operations/GetTruckDetails/' + TruckNo,
-           //url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/GetTruckDetails/' + TruckNo,
+			//url: 'http://localhost:51594/api/Operations/GetTruckDetails/' + TruckNo,
+           url: 'http://apps.kpcl.com/KPCLOpsAPI/api/Operations/GetTruckDetails/' + TruckNo,
 
             type: 'GET',
             data: '{}',

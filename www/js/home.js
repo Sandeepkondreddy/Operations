@@ -1,8 +1,9 @@
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
-    document.addEventListener("backbutton", onBackKeyDown, false);
+   
     window.plugins.imeiplugin.getImei(callback);	
+	 document.addEventListener("backbutton", onBackKeyDown, false);
 }
 function callback(imei) {
     $("#hidIMEI").val(imei);
@@ -36,7 +37,7 @@ $(document).ready(function(){
         $("#loading").hide();
 		
         $(".box7").click(function(){
-			alert(document.getElementById('hidDeviceId').value);
+			alert($("#hidusrid").val());
             $("#loading").show();
             window.location.href = 'Operations.html?user=' + btoa($("#hidusrid").val()) + '';
         });

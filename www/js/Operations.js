@@ -209,7 +209,7 @@ function VaalidateUserStage(stageid)
             async: false,
             success: function (result) {
                 if (result.length > 0) {
-					alert(result[1]);
+					//alert(result[1]);
 					if (result[1] == 'True') {
 						$("#btnSubmit").attr('disabled',false);
 						}

@@ -34,7 +34,9 @@ function qs() {
 $(document).ready(function(){
         qs();		
         $("#loading").hide();
+		alert(document.getElementById('hidDeviceId').value);
         $(".box7").click(function(){
+			
             $("#loading").show();
             window.location.href = 'Operations.html?user=' + btoa($("#hidusrid").val()) + '';
         });

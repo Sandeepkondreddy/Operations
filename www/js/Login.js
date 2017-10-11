@@ -19,7 +19,7 @@ var url = "";
  $(document).ready(function() {
 		initDatabase();//showUserRecords();
         $("#txtusername").focus();
-        $("#btnSubmit").click(function() {
+        $("#btnSubmit").click(function() {debugger;
             var $btn = $("#btnSubmit");
 			//var exitbtn = document.getElementById("btnExit"); exitbtn.disabled = true;
 			

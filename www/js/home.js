@@ -100,9 +100,11 @@ function ValidateDevice(){
         success: function (result) {          
 			if (result != "--") {
                 alert('Device Already Registered.');
+				$("#btnSubmit").attr('disabled',false);
             }
             else {
 				alert('Device Not Registered, Please contact IT Team.');
+				$("#btnSubmit").attr('disabled',true);
             } 
         },
         error: function () {

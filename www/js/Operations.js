@@ -19,7 +19,7 @@ function onDeviceReady() {
                 btnSubmit.style.display = 'none';
                 btnClear.style.display = 'none';
 				//document.getElementById("btnSubmit").disabled = true;
-				
+				GetTagDetails(label.data.substring(3));
                 //GetTruckDetails(label.data.substring(3));//Added for fetching truck details on NFC read
                 //oldvalue = "";
                 //GetDeviceStatus();

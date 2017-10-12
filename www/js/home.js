@@ -34,8 +34,7 @@ function qs() {ValidateDevice();
 $(document).ready(function () {
     $("#loading").hide();
     qs();
-    //GetDeviceStatus();
-
+ 
     $("#home").click(function () {
         $.ajax({
             type: "GET",
@@ -89,7 +88,6 @@ $(document).ready(function () {
 
 function ValidateDevice(){
 	
-	
 					$.ajax({
                                 type: "GET",
 								url: "http://apps.kpcl.com/KPCLOpsAPI/api/User/DeviceValidate/" + $("#hidimei").val()+"/"+$("#hiduuid").val(),
@@ -109,7 +107,7 @@ function ValidateDevice(){
 								error: function () {
 									alert('Error Occurred while getting Details');
 								}
-                            });
+     });
 /*     var Adddata = {};
     //Adddata.IMEI = $("#hidimei").val();
     //Adddata.UUID = $("#hiduuid").val();
@@ -133,6 +131,6 @@ function ValidateDevice(){
         },
         error: function () {
             alert('Error Occurred while getting Device Status');
-        } */
-    });
+        } 
+    });*/
 }

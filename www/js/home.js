@@ -88,13 +88,37 @@ $(document).ready(function () {
 });
 
 function ValidateDevice(){
-    var Adddata = {};
-    Adddata.IMEI = $("#hidimei").val();
-    Adddata.UUID = $("#hiduuid").val();
+	
+	
+					$.ajax({
+                                type: "GET",
+								url: "http://apps.kpcl.com/KPCLOpsAPI/api/User/DeviceValidate/" + $("#hidimei").val()+"/"+$("#hiduuid").val(),
+                                data: '{}',
+                                contentType: "application/json",
+                                success: function(result) {
+									if (result == "Registered") {
+										alert('Device Already Registered.');
+										$("#btnSubmit").attr('disabled',false);
+										}
+										else {
+											alert('Device Not Registered, Please contact IT Team.');
+											$("#btnSubmit").attr('disabled',true);
+										} 
+                                    
+                                },
+								error: function () {
+									alert('Error Occurred while getting Details');
+								}
+                            });
+/*     var Adddata = {};
+    //Adddata.IMEI = $("#hidimei").val();
+    //Adddata.UUID = $("#hiduuid").val();
+	Adddata.IMEI = '867634029115001';
+    Adddata.UUID = 'c776f47a7e1724cc';
     $.ajax({
         type: "POST",
-        url: "http://apps.kpcl.com/KPCLOpsAPI/api/Device/ValidateDevice",
-	//url: "http://182.72.244.25/KPCTSDS/api/Account/GetDeviceStatus",
+        //url: "http://apps.kpcl.com/KPCLOpsAPI/api/Device/ValidateDevice",	
+		url: "http://localhost:51594/api/Device/ValidateDevice",	
         dataType: "json",
         data: Adddata,
         success: function (result) {          
@@ -109,6 +133,6 @@ function ValidateDevice(){
         },
         error: function () {
             alert('Error Occurred while getting Device Status');
-        }
+        } */
     });
 }

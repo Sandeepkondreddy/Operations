@@ -11,7 +11,7 @@ function callback(imei) {
 }
 function onBackKeyDown() {
 }
-function qs() {ValidateDevice();
+function qs() {
     var query = window.location.search.substring(1);
     var parms = query.split('&');
     for (var i = 0; i < parms.length; i++) {
@@ -51,7 +51,8 @@ $(document).ready(function () {
 
 	$(".box7").click(function(){
             $("#loading").show();
-            window.location.href = 'Operations.html?user=' + btoa($("#hidusrid").val()) + '';
+			ValidateDevice();
+            
         });
 	
     /* $("#btnSubmit").click(function (){
@@ -87,7 +88,7 @@ $(document).ready(function () {
 });
 
 function ValidateDevice(){
-	
+	alert($("#hidimei").val()+$("#hiduuid").val());
 					$.ajax({
                                 type: "GET",
 								url: "http://apps.kpcl.com/KPCLOpsAPI/api/User/DeviceValidate/" + $("#hidimei").val()+"/"+$("#hiduuid").val(),
@@ -96,11 +97,12 @@ function ValidateDevice(){
                                 success: function(result) {
 									if (result == "Registered") {
 										alert('Device Already Registered.');
-										$("#btnSubmit").attr('disabled',false);
+										window.location.href = 'Operations.html?user=' + btoa($("#hidusrid").val()) + '';
+										//$("#btnSubmit").attr('disabled',false);
 										}
 										else {
 											alert('Device Not Registered, Please contact IT Team.');
-											$("#btnSubmit").attr('disabled',true);
+											//$("#btnSubmit").attr('disabled',true);
 										} 
                                     
                                 },

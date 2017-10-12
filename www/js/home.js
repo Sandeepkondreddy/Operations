@@ -1,7 +1,7 @@
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
-   
+   $("#hidUUId").val(device.uuid);
     window.plugins.imeiplugin.getImei(callback);	
 	 document.addEventListener("backbutton", onBackKeyDown, false);
 }
@@ -37,8 +37,32 @@ $(document).ready(function(){
         $("#loading").hide();
 		
         $(".box7").click(function(){
-			alert($("#hidusrid").val());
+			alert($("#hidIMEI").val());
             $("#loading").show();
             window.location.href = 'Operations.html?user=' + btoa($("#hidusrid").val()) + '';
         });
 });
+
+function ValidateDevice(){
+    var Adddata = {};
+    Adddata.IMEI = $("#hidIMEI").val();
+    Adddata.UUID = $("#hidUUId").val();
+    $.ajax({
+        type: "POST",
+        url: "http://apps.kpcl.com/KPCLOpsAPI/api/Device/ValidateDevice",
+	//url: "http://182.72.244.25/KPCTSDS/api/Account/GetDeviceStatus",
+        dataType: "json",
+        data: Adddata,
+        success: function (result) {          
+			if (result != "--") {
+                alert('Device Already Registered.');
+            }
+            else {
+				alert('Device Not Registered, Please Contact IT Team.');
+            } 
+        },
+        error: function () {
+            alert('Error Occurred while getting Device Status');
+        }
+    });
+}

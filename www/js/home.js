@@ -96,12 +96,12 @@ function ValidateDevice(){
                                 contentType: "application/json",
                                 success: function(result) {
 									if (result == "Registered") {
-										alert('Device Already Registered.');
+										//alert('Device Already Registered.');
 										window.location.href = 'Operations.html?user=' + btoa($("#hidusrid").val()) + '';
 										//$("#btnSubmit").attr('disabled',false);
 										}
 										else {
-											alert('Device Not Registered, Please contact IT Team.');
+											alert('Device Not Registered, Please contact IT Team.');$("#loading").hide();
 											//$("#btnSubmit").attr('disabled',true);
 										} 
                                     

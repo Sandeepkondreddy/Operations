@@ -1,16 +1,17 @@
+var qsParm = new Array();
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
-   $("#hidUUId").val(device.uuid);
-    window.plugins.imeiplugin.getImei(callback);	
-	 document.addEventListener("backbutton", onBackKeyDown, false);
+   document.addEventListener("backbutton", onBackKeyDown, false);
+    $("#hidUUId").val(device.uuid);
+    window.plugins.imeiplugin.getImei(callback);
 }
 function callback(imei) {
     $("#hidIMEI").val(imei);
 }
 function onBackKeyDown() {
     }
-var qsParm = new Array();
+//var qsParm = new Array();
 function qs() {
         var query = window.location.search.substring(1);
         var parms = query.split('&');
@@ -37,7 +38,7 @@ $(document).ready(function(){
         $("#loading").hide();
 		
         $(".box7").click(function(){
-			alert($("#hidIMEI").val());
+			
             $("#loading").show();
             window.location.href = 'Operations.html?user=' + btoa($("#hidusrid").val()) + '';
         });

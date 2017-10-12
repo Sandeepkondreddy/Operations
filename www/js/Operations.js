@@ -12,21 +12,13 @@ function onDeviceReady() {
                 txttruckno.value = "";
                 var tagdata = record.tag.ndefMessage[0]["payload"];
                 var label = document.createTextNode(nfc.bytesToString(tagdata));
-                //txttruckno.value = label.data.substring(3);
                 txttag.value=label.data.substring(3);
                 txttruckno.value="";
                 lblMsg.innerHTML = "";
-                btnSubmit.style.display = 'none';
-                btnClear.style.display = 'none';
-				//document.getElementById("btnSubmit").disabled = true;
-				GetTagDetails(label.data.substring(3));
-                //GetTruckDetails(label.data.substring(3));//Added for fetching truck details on NFC read
-                //oldvalue = "";
-                //GetDeviceStatus();
-                //GetTag_TruckDetails(label.data.substring(3));//Added for fetching truck details on NFC read				
-                //GetDeviceStatus();
-                //Reason();
-                //GetUserStages($("#hidusrid").val());
+                //btnSubmit.style.display = 'none';
+                //btnClear.style.display = 'none';
+				GetTagDetails(label.data.substring(3));//Added for fetching tag details on NFC read
+
                 $("#loading").hide();
             },
             function(){
@@ -55,7 +47,7 @@ function scanTag()
                  $("#txttruckno").val("");
                  $("#txttag").val(result.text);
 				 GetTagDetails(result.text);				 
-				 //VaalidateUserStage($("#hidNStageId").val());
+				 
             }
         },
         function (error) {
@@ -89,7 +81,7 @@ function SaveOperationDetails(){
 			Adddata.DeviceId = document.getElementById('hidDeviceId').value;
 			Adddata.Remarks = $("#txtremarks").val();
 			Adddata.Operation=$("#txtOperation").val();
-            //Adddata.GeoLocation = document.getElementById('geolocation').innerHTML;            
+          
             Adddata.UserId = $("#hidusrid").val();
             $.ajax({
                 type: 'POST',
@@ -129,7 +121,6 @@ function GetTagDetails(tagno)
                     $("#txttruckno").val(result[0].TruckNo);
                     $("#txtOpCode").val(result[0].OperationCode);
                     $("#txtCStage").val(result[0].CurrentStageName);
-					//$("#txtCStageTime").val(result[0].CurrentStageId);
 					$("#txtOperation").val(result[0].Operation);
 					$("#btnSubmit span").text(result[0].NextStageName);
 					$("#hidNStageId").val(result[0].NextStageId);
@@ -170,7 +161,7 @@ function GetTruckDetails(truckno)
                     $("#txttag").val(result[0].TagNo);
                     $("#txtOpCode").val(result[0].OperationCode);
                     $("#txtCStage").val(result[0].CurrentStageName);
-					//$("#txtCStageTime").val(result[0].CurrentStageId);
+
 					$("#txtOperation").val(result[0].Operation);
 					$("#btnSubmit span").text(result[0].NextStageName);
 					$("#hidNStageId").val(result[0].NextStageId);

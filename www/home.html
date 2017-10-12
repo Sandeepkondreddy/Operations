@@ -1,140 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Default</title>
-        <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
-        <link rel="stylesheet" type='text/css' href="bootstrap/css/bootstrap.css">
-        <link rel="stylesheet" type='text/css' href="css/loading.css">
-        <link rel="stylesheet" type='text/css' href="font-awesome/css/font-awesome.min.css">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <title>SDS</title>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/loading.css">
+        <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
         <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Ubuntu'>
         <style type="text/css">
             body{
-                font-family: Ubuntu;
-                text-align: center;
-                vertical-align: middle;
+                font-family: Ubuntu, Consolas;
             }
-            table{
-                width: 100%;
-                height: 90%;
-                left: 0px;
-                top: 0px;
-                margin: 0px;
-                background-color: white;
-            }
-            td{
-                padding: 2px;
-                width: 50%;
-                height: 50%;
-                vertical-align: middle;
-                text-align: center;
-            }
-            label{
-                color: white;
-                font-size: 12px;
-            }
-            .topbar{
-                background-color: #2C82C9;
-                top: 0px;
-                left: 0px;
-                width: 100%;
-                height: 50px;
-                vertical-align: middle;
-                padding: 10px;
-				box-shadow: 2px 2px 3px #9E9D9B;
-            }
-            .topbar-icon{
-                width: 50px;
-                cursor: pointer;
-            }
-            .topbar label{
-                font-size: 13px;
-                width: 100%;
-                text-shadow: 1px 1px 2px #9D9C9C;
-            }
-            .circle{
-                background-color: #EEEFF1;
+            .content {
                 border-radius: 5px;
-                box-shadow: 3px 3px 2px 0px #7A7A7A;
-                height: auto;
-                padding: 8px;
+                /*border: 1px solid #c9c9c9;*/
+                padding: 10px;
+                height: 400px;
+                width: 100%;
+                overflow: auto;
+                background-color: #fff;
             }
-            .box{
+            .readonly-active{
+                background: #fff;
+                border-bottom: 1px solid #808080;
+                border: 0px;
+                border-radius: 0;
+                outline: none;
+            }
+            #imgtruck {
+                animation: blink 1s;
+                animation-iteration-count: infinite;
+            }
+            @keyframes blink {
+                0% {
+                    opacity: 1;
+                }
+
+                50% {
+                    opacity: 0;
+                }
+
+                100% {
+                    opacity: 1;
+                }
+            }
+			
+			.box{
                 border-radius: 7px;
                 padding: 5px;
                 cursor: pointer;
                 box-shadow: 2px 2px 3px #9E9D9B;
             }
-            .box1{
-                background-color: #2C82C9;
-            }
-            .box2{
-                background-color: #2CC990;
-            }
-            .box3{
-                background-color: #F1654C;
-            }
-            .box4{
-                background-color: #83CF8F;
-            }
-			.box5{
-                background-color: #F87217;
-            }
-			.box6{
-                background-color: #C12267;
-            }
 			.box7{
                 background-color: #008080;
-            }
-            .fa{
-                color: #F1FBFD;
-                text-shadow: 2px 1px 2px #787878;
-            }
-            ::-webkit-input-placeholder {
-                color: #CCCACA;
-                text-transform: uppercase;
-            }
-            :-moz-placeholder { /* Firefox 18- */
-                color: #CCCACA;
-                text-transform: uppercase;
-            }
-            ::-moz-placeholder {  /* Firefox 19+ */
-                color: #CCCACA;
-                text-transform: uppercase;
-            }
-            :-ms-input-placeholder {
-                color: #CCCACA;
-                text-transform: uppercase;
-            }
-            ::-webkit-scrollbar {
-                width: 5px;
-            }
-            ::-webkit-scrollbar-track {
-                background-color: #eaeaea;
-                border-left: 0px solid #ccc;
-                border-radius: 10px;
-            }
-            ::-webkit-scrollbar-thumb {
-                background-color: #ccc;
-                border-radius: 10px;
-            }
-            ::-webkit-scrollbar-thumb:hover {
-                background-color: #aaa;
             }
         </style>
     </head>
     <body>
+        <input type="hidden" id="hidTruckId">
+        <input type="hidden" id="hidStatusId">
         <div id="loading" class="loading">Loading&#8230;</div>
-        <div class="topbar">
+        <div id="header1" class="headerbar">
+            <!--<img alt="logo" class="imglogo" src="img/logo.png"><br>
+            <strong><span class="headertext">KRISHNAPATNAM PORT</span></strong>
+            <span class="text-right"><i class="fa fa-power-off fa-2x"></i></span>-->
             <table style="background: transparent; width: 100%;">
                 <tr>
-                    <td class="text-center" style="width: 100%;"><label>KRISHNAPATNAM PORT</label></td>
+                    <td class="topbar-icon text-left"><i id="home" class="fa fa-home fa-2x" aria-hidden="true"></i></td>
+                    <td class="text-center"><span class="headertext">KRISHNAPATNAM PORT</span></td>
                     <td class="topbar-icon text-right"><a href="login.html"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i></a></td>
                 </tr>
             </table>
         </div>
         <br>
         <div class="container text-center">
-            <table>
+            <table>                
                 <tr>
                     <td style="padding: 7px;">
                         <div class="box box7">
@@ -146,11 +88,11 @@
             </table>
         </div>
         <input type="hidden" id="hidusrid">
-		<input type="hidden" id="hidUUId">
-		<input type="hidden" id="hidIMEI">
+		<input type="hidden" id="hiduuid">
+		<input type="hidden" id="hidimei">
     </body>
 </html>
-<script type="text/javascript" src="js/jquery1.11.1-min.js"></script>
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/home.js"></script>
-

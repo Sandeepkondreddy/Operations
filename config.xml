@@ -45,7 +45,7 @@
     <plugin name="cordova-plugin-network-information" source="npm" />
     <plugin name="cordova-plugin-splashscreen" source="npm" />
     <plugin name="cordova-plugin-vibration" source="npm" />
-<plugin name="uk.co.workingedge.cordova.plugin.sqliteporter" source="npm" />
+ <plugin name="uk.co.workingedge.cordova.plugin.sqliteporter" source="npm" />
     <plugin name="cordova-plugin-statusbar" source="npm" />
     <plugin name="cordova-plugin-whitelist" source="npm" />
     <plugin name="imeiplugin" source="npm" />
